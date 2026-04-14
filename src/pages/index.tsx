@@ -5,16 +5,16 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
 import HomepageFeatures from '@site/src/components/HomepageFeatures'
 
-import Courses, { type CourseItem } from '@site/src/data/courses'
+import Courses, {type CourseItem} from '@site/src/data/courses'
 import Course from '../components/Course'
 
 import Heading from '@theme/Heading'
-import Translate, { translate } from '@docusaurus/Translate'
+import Translate, {translate} from '@docusaurus/Translate'
 
 import styles from './index.module.css'
 
 function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext()
+  const {siteConfig} = useDocusaurusContext()
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
@@ -50,14 +50,13 @@ function CourseSection() {
     <div className={clsx(styles.section, styles.sectionAlt)}>
       <div className="container">
         <Heading as="h2" className={clsx('margin-bottom--lg', 'text--center')}>
-          <h2>Acesso rápido aos iniciante</h2>
+          <h2>Acesso rápido aos iniciantes</h2>
         </Heading>
         <div className={clsx('row', styles.coursesSection)}>
           {courseColumns.map((courseItems, i) => (
             <div className="col col--4" key={i}>
               {courseItems.map((course) => (
                 <Course {...course} key={course.url} />
-                // <div>course.name</div>
               ))}
             </div>
           ))}
@@ -68,12 +67,9 @@ function CourseSection() {
 }
 
 export default function Home() {
-  const { siteConfig } = useDocusaurusContext()
+  const {siteConfig} = useDocusaurusContext()
   return (
-    <Layout
-      title={`${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />"
-    >
+    <Layout title={`${siteConfig.title}`} description={siteConfig.tagline}>
       <HomepageHeader />
       <main>
         <TimetablesAnnouncement />
@@ -83,3 +79,4 @@ export default function Home() {
     </Layout>
   )
 }
+
