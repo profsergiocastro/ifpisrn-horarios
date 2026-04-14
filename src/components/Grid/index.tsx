@@ -1,0 +1,189 @@
+import React, {
+  createContext,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+} from 'react'
+
+import {
+  settingsReducer,
+  TimetableViewType,
+  TimetableColorType,
+} from '@site/src/reducers/settings/reducer'
+
+import { Days, GridContextType, Time } from '@site/src/interfaces/interfaces'
+import { GridContainer } from './styles'
+import { findPositionY } from '@site/src/utils/find-position-y'
+import { reduceTimetable } from '@site/src/utils/reduce-timetable'
+import { defineColorBase } from '@site/src/utils/define-color-base'
+import { Header } from '../Header'
+import { Sidebar } from '../Sidebar'
+import { Timetable } from '../Timetable'
+import { Footer } from '../Footer'
+import {
+  changeMenu,
+  changeTimetableView,
+  changeTimetableColor,
+} from '@site/src/reducers/settings/actions'
+import { createLinkToEachClass } from '@site/src/utils/create-link-to-each-class'
+import { createHalfHourTimeSlots } from '@site/src/utils/create-time-slots'
+import { mergeAdjacentClasses } from '@site/src/utils/merge-adjacent-classes'
+
+interface GridProps {
+  title?: string
+  time?: Time[]
+  weekClasses: Days[]
+  textFooter?: string
+}
+
+function cloneData<T>(value: T): T {
+  // structuredClone is supported by modern browsers and Node 18+
+  // Fallback keeps this working in older environments.
+  // eslint-disable-next-line no-undef
+  if (typeof structuredClone === 'function') return structuredClone(value)
+  return JSON.parse(JSON.stringify(value)) as T
+}
+
+function setGridTemplateRows(textFooter: string) {
+  let gridTemplateRows = '50px 1fr'
+  return textFooter ? (gridTemplateRows += ' 50px') : gridTemplateRows
+}
+
+function setWeekClassesSettings(
+  weekClasses: Days[],
+  title: string,
+  time: Time[],
+  timetableColor: string,
+) {
+  let newWeekClasses = []
+  // newWeekClasses = findPositionY({ weekClasses, time })
+  newWeekClasses = mergeAdjacentClasses(weekClasses)
+  newWeekClasses = createLinkToEachClass({
+    weekClasses: newWeekClasses,
+    title,
+  })
+
+  
+  newWeekClasses = defineColorBase({
+    weekClasses: newWeekClasses,
+    title,
+  })
+  return newWeekClasses
+}
+
+export const GridContext = createContext({} as GridContextType)
+
+export function Grid({ title, time, weekClasses, textFooter }: GridProps) {
+  // console.log(weekClasses)
+  const safeTitle = title ?? ''
+  const timeInitial = useMemo(() => createHalfHourTimeSlots(), [])
+  const weekClassesPrepared = useMemo(
+    () => setWeekClassesSettings(weekClasses, safeTitle, timeInitial, 'allColor'),
+    [weekClasses, safeTitle, timeInitial],
+  )
+
+  const [settingsState, dispatch] = useReducer(
+    settingsReducer,
+    {
+      settings: {
+        isMenuFixed: false,
+        timetableView: 'completed' as TimetableViewType,
+        timetableColor: 'allColor' as TimetableColorType,
+      },
+      timeChanged: [],
+      weekClassesChanged: [],
+    },
+    (initialState) => {
+      const storedStateAsJSON = localStorage.getItem('settings-of-time')
+      
+      let settings = initialState.settings
+
+      if (storedStateAsJSON) {
+        const parsed = JSON.parse(storedStateAsJSON)
+        settings = {
+          ...settings,
+          ...parsed,
+          timetableView: parsed.timetableView as TimetableViewType,
+          timetableColor: parsed.timetableColor as TimetableColorType,
+        }
+      }
+
+      const timetableColorInitial = settings.timetableColor
+      const newWeekClasses = cloneData(weekClassesPrepared)
+      const timetableViewInitial = settings.timetableView
+
+      const { timeChanged, weekClassesChanged } = reduceTimetable({
+        weekClasses: newWeekClasses,
+        time: timeInitial,
+        timetableView: timetableViewInitial,
+      })
+
+      return {
+        ...initialState,
+        settings,
+        weekClassesChanged,
+        timeChanged,
+      }
+    },
+  )
+  const { settings, timeChanged, weekClassesChanged } = settingsState
+  const { timetableView, isMenuFixed, timetableColor } = settings
+
+  function reduceGrid(newTimetableView: TimetableViewType) {
+    const data = {
+      timetableView: newTimetableView,
+      timeInitial,
+      weekClassesInitial: cloneData(weekClassesPrepared),
+    }
+    dispatch(changeTimetableView(data))
+  }
+
+  function modifyMenu(data: boolean) {
+    dispatch(changeMenu(data))
+  }
+
+  function colorizeGrid(newColor: TimetableColorType) {
+    dispatch(changeTimetableColor({ timetableColor: newColor }))
+  };
+
+  const rowsSize = timeChanged.reduce((acc, elemento) => {
+    return (acc += ` ${elemento.size}fr`)
+  }, '')
+
+  const gridRef = useRef(null)
+
+  useEffect(() => {
+    const { settings } = settingsState
+    const stateJSON = JSON.stringify(settings)
+
+    localStorage.setItem('settings-of-time', stateJSON)
+  }, [settingsState])
+
+  return (
+    <GridContext.Provider
+      value={{
+        title: safeTitle,
+        timeChanged,
+        weekClassesChanged,
+        timetableView,
+        timetableColor,
+        isMenuFixed,
+        rowsSize,
+        gridRef,
+        modifyMenu,
+        reduceGrid,
+        colorizeGrid,
+        weekClassesInitial: cloneData(weekClassesPrepared),
+        timeInitial,
+      }}
+    >
+      <GridContainer $gridRows={setGridTemplateRows(textFooter)} ref={gridRef}>
+        <Header />
+        <Sidebar />
+        <Timetable />
+        {/* {textFooter ? <Footer textFooter={textFooter} /> : ''} */}
+      </GridContainer>
+    </GridContext.Provider>
+  )
+}

@@ -1,9 +1,36 @@
-# Horários IFPI-SRN
+# Horários IFPI - Campus São Raimundo Nonato
 
-Site simples para divulgação dos horários das turmas, professores e salas do IFPI São Raimundo Nonato.
+Site para divulgação dos horários (turmas, professores e salas) do IFPI – Campus São Raimundo Nonato.
 
-## Como acessar
-Acesse o site publicado em breve via GitHub Pages.
+## Acesso
 
-## Como contribuir
-Envie sugestões ou abra issues neste repositório.
+O site é publicado via GitHub Pages:
+
+- https://sergiocastro9.github.io/ifpisrn-horarios/
+
+## Desenvolvimento
+
+Instalar dependências:
+
+```bash
+npm ci
+```
+
+Rodar com hot-reload (modo dev — a busca pode não funcionar aqui):
+
+```bash
+npm run dev
+```
+
+Rodar como produção (build + serve — busca funciona):
+
+```bash
+npm start
+```
+
+## Atualizar horários (FET CSV → MDX)
+
+```bash
+npm run generate:fet:csv -- "C:\Users\sergi\fet-results\csv\IFPISRN20261VersaoFinal\IFPISRN20261VersaoFinal_timetable.csv"
+```
+
