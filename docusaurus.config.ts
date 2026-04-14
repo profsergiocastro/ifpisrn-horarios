@@ -43,7 +43,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/ifpi-social-card.png',
+    image: 'img/favicon.gif',
     navbar: {
       logo: {
         alt: 'IFPI - Campus São Raimundo Nonato',
