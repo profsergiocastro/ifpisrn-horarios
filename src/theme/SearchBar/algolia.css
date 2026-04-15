@@ -255,15 +255,14 @@
 }
 
 @media (min-width: 601px) {
-  /* Align dropdown with the search input (avoid overflowing off-screen to the right) */
+  /* Align dropdown so its right edge matches the input right edge (prevents clipping on the right) */
   .algolia-autocomplete.algolia-autocomplete-right .ds-dropdown-menu {
-    left: 0 !important;
-    right: auto !important;
+    right: 0 !important;
+    left: inherit !important;
   }
 
   .algolia-autocomplete.algolia-autocomplete-right .ds-dropdown-menu:before {
-    left: 24px;
-    right: auto;
+    right: 48px;
   }
 
   .algolia-autocomplete .ds-dropdown-menu {
@@ -278,8 +277,9 @@
     background: transparent;
     border: none;
     z-index: 999;
+    width: min(600px, calc(100vw - 2rem));
     max-width: min(600px, calc(100vw - 2rem));
-    min-width: min(420px, calc(100vw - 2rem));
+    min-width: 0;
   }
 }
 
