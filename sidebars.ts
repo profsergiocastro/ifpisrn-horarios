@@ -87,6 +87,8 @@ const sidebars: SidebarsConfig = {
         'cursos/tecnico-administracao-subsequente',
         'cursos/tecnico-gastronomia-subsequente',
         'cursos/tecnico-guia-de-turismo-subsequente',
+        'cursos/tecnico-servico-de-restaurante-e-bar',
+        'cursos/tecnico-gastronomia-proeja',
         {
           type: 'html',
           value: '<div class="sidebarSectionHeading">LICENCIATURA</div>',
