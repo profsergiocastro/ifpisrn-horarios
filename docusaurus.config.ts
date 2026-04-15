@@ -16,27 +16,6 @@ function formatIsoToBr(iso: string) {
   return `${d}/${m}/${y}`;
 }
 
-function getVersionsDropdownItems() {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const data = require('./src/data/siteVersions.json') as {
-    current: SiteVersionRow;
-    history: SiteVersionRow[];
-  };
-
-  return [
-    {
-      label: `${data.current.version} (Atual)`,
-      to: '/docs/intro',
-    },
-    ...data.history.map((row) => ({
-      label: row.end
-        ? `${row.version} (até ${formatIsoToBr(row.end)})`
-        : row.version,
-      to: `/docs/${row.id}/intro`,
-    })),
-  ];
-}
-
 function getSearchExcludeRoutesForOldVersions() {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const data = require('./src/data/siteVersions.json') as {
@@ -44,6 +23,26 @@ function getSearchExcludeRoutesForOldVersions() {
   };
   const history = Array.isArray(data.history) ? data.history : [];
   return history.map((row) => `docs/${row.id}/**`);
+}
+
+function getDocsVersionsConfig() {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const data = require('./src/data/siteVersions.json') as {
+    current: SiteVersionRow;
+    history: SiteVersionRow[];
+  };
+
+  const versions: Record<string, {label: string}> = {
+    current: {label: data.current.version},
+  };
+
+  for (const row of data.history ?? []) {
+    versions[row.id] = {
+      label: row.end ? `${row.version} (até ${formatIsoToBr(row.end)})` : row.version,
+    };
+  }
+
+  return versions;
 }
 
 const config: Config = {
@@ -79,19 +78,7 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           lastVersion: 'current',
-          versions: {
-            current: {
-              // Keep the default docs route (/docs/...) pointing to the current timetable.
-              // The version label is purely cosmetic for Docusaurus internal version UI.
-              label: (() => {
-                // eslint-disable-next-line @typescript-eslint/no-var-requires
-                const v = require('./src/data/siteVersions.json') as {
-                  current: SiteVersionRow;
-                };
-                return v.current.version;
-              })(),
-            },
-          },
+          versions: getDocsVersionsConfig(),
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -116,9 +103,8 @@ const config: Config = {
           label: 'Quadro de Horários',
         },
         {
-          label: 'Versões',
+          type: 'docsVersionDropdown',
           position: 'left',
-          items: getVersionsDropdownItems(),
         },
         {
           type: 'search',
