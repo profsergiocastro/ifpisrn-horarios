@@ -20,7 +20,6 @@ function getCategoryFromUrl(url) {
   if (u.includes('/docs/professor/')) return 'Professores';
   if (u.includes('/docs/turma/')) return 'Turmas';
   if (u.includes('/docs/sala/')) return 'Salas';
-  if (u.includes('/docs/disciplina/')) return 'Disciplinas';
   if (u.includes('/docs/intro')) return 'Home';
   return 'Outros';
 }
@@ -63,8 +62,13 @@ class SearchAdapter {
     const normalizedInput = normalizeText(input);
     return this.lunrIndex.query(function (query) {
       const tokens = lunr.tokenizer(normalizedInput);
-      query.term(tokens, { boost: 10 });
-      query.term(tokens, { wildcard: lunr.Query.wildcard.TRAILING });
+      // We normalize query terms ourselves, and we must disable the pipeline for wildcard queries:
+      // otherwise lunr.trimmer would remove the trailing '*' and prefix matching would break.
+      query.term(tokens, { boost: 10, usePipeline: false });
+      query.term(tokens, {
+        wildcard: lunr.Query.wildcard.TRAILING,
+        usePipeline: false,
+      });
     });
   }
 
@@ -210,4 +214,3 @@ class SearchAdapter {
 }
 
 export default SearchAdapter;
-
