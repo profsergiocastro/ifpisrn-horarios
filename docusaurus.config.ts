@@ -140,7 +140,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © 2026 Prof. Sérgio Castro.`,
+      copyright: `Copyright © 2026 Prof. Sérgio Castro e Prof. Von Mecheln.`,
     },
     prism: {
       theme: prismThemes.github,
