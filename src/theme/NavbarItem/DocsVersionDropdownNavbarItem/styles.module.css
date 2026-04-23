@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  cursor: default;
+  cursor: pointer;
 }
 
 .semesterLabel::after {
@@ -25,10 +25,11 @@
 
 .versionSubmenu {
   position: absolute;
-  left: 100%;
+  /* overlap slightly to avoid any hover "gap" that can close the menu */
+  left: calc(100% - 0.5rem);
   top: 0;
   display: none;
-  margin-left: 0.25rem;
+  margin-left: 0;
   min-width: 14rem;
   max-height: 70vh;
   overflow: auto;
@@ -38,4 +39,3 @@
 .semesterItem:focus-within .versionSubmenu {
   display: block;
 }
-

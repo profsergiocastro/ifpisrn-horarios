@@ -200,6 +200,7 @@ export default function DocsVersionDropdownNavbarItem({
         aria-expanded={showDropdown}
         role="button"
         href="#"
+        label="Versão"
         className={clsx('navbar__link', styles.versionsButton)}
         {...props}
         onClick={(e: any) => e.preventDefault()}
@@ -209,13 +210,18 @@ export default function DocsVersionDropdownNavbarItem({
             setShowDropdown(!showDropdown);
           }
         }}>
-        Versão
       </NavbarNavLink>
 
       <ul className={clsx('dropdown__menu', styles.semesterMenu)}>
         {grouped.map(([semester, items]) => (
           <li key={semester} className={clsx('dropdown__item', styles.semesterItem)}>
-            <span className={clsx('dropdown__link', styles.semesterLabel)}>{semester}</span>
+            <a
+              href="#"
+              className={clsx('dropdown__link', styles.semesterLabel)}
+              role="button"
+              onClick={(e) => e.preventDefault()}>
+              {semester}
+            </a>
             <ul className={clsx('dropdown__menu', styles.versionSubmenu)}>
               {items.map((item, i) => (
                 <li key={`${semester}-${i}`} className="dropdown__item">
@@ -235,4 +241,3 @@ export default function DocsVersionDropdownNavbarItem({
     </div>
   );
 }
-
