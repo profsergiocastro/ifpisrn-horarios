@@ -1,0 +1,213 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\definecolor{ifpigreen}{HTML}{217A34}
+\definecolor{codegray}{HTML}{F4F5F7}
+\hypersetup{colorlinks=true,linkcolor=ifpigreen,urlcolor=ifpigreen}
+\lstset{basicstyle=\ttfamily\small,backgroundcolor=\color{codegray},frame=single,breaklines=true,columns=fullflexible,showstringspaces=false}
+\setlength{\headheight}{14pt}
+\setlength{\emergencystretch}{3em}
+\sloppy
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{IFPI - Campus São Raimundo Nonato}
+\rhead{Publicação de horários}
+\cfoot{\thepage}
+\titleformat{\section}{\Large\bfseries\color{ifpigreen}}{\thesection}{0.6em}{}
+\title{\textbf{Guia de publicação do Quadro de Horários}\\\large IFPI - Campus São Raimundo Nonato}
+\author{Projeto \texttt{ifpisrn-horarios}}
+\date{Atualizado em 16 de julho de 2026}
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Objetivo e informações do projeto}
+Este guia explica como atualizar o quadro de horários publicado a partir de um CSV exportado pelo FET Timetables. O site é um projeto Docusaurus e gera páginas MDX individuais para turmas, professores e salas.
+
+\begin{longtable}{p{0.31\textwidth}p{0.62\textwidth}}
+\toprule
+Item & Valor \\
+\midrule
+Pasta do projeto & \texttt{C:\textbackslash Users\textbackslash sergi\textbackslash Desktop\textbackslash MEGA Note\textbackslash PYTHON\textbackslash ifpisrn-horarios} \\
+Repositório & \url{https://github.com/profsergiocastro/ifpisrn-horarios} \\
+Site publicado & \url{https://profsergiocastro.github.io/ifpisrn-horarios/} \\
+Branch publicada & \texttt{main} \\
+Deploy & GitHub Pages, automático após \texttt{git push origin main} \\
+Gerador CSV & \texttt{scripts/fet-csv-to-mdx.mjs} \\
+Criador de versão & \texttt{scripts/bump-timetable-version.mjs} \\
+Metadados das versões & \texttt{src/data/siteVersions.json} \\
+\bottomrule
+\end{longtable}
+
+\section{Conceitos importantes}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Versão atual}: o conteúdo em \texttt{docs/professor}, \texttt{docs/turma} e \texttt{docs/sala}. A busca e os links padrão devem levar para ela.
+  \item \textbf{Versão histórica}: uma cópia automática da versão atual, criada antes de substituir o horário por uma nova versão relevante. Ela fica em \texttt{versioned\_docs} e pode ser aberta pelo menu Versão.
+  \item \textbf{Atualização pontual}: substitui o CSV da versão atual, mas não cria versão histórica. Use somente para correções que não justifiquem novo histórico.
+  \item \textbf{Campus e cursos}: \texttt{docs/campus} e \texttt{docs/cursos} são independentes dos horários. Eles não devem ser apagados, recriados pelo CSV ou versionados junto com a grade.
+  \item \textbf{Versão estável}: referência Git para um estado aprovado. O branch \texttt{stable} deve apontar para a versão estável mais recente; use também uma tag datada para facilitar retorno futuro.
+\end{itemize}
+
+\section{Pré-requisitos}
+\begin{enumerate}[leftmargin=*]
+  \item Instale Node.js 20 ou superior e Git.
+  \item Tenha acesso de escrita ao repositório no GitHub e autenticação funcionando no \texttt{git} e no \texttt{gh}.
+  \item Exporte no FET um arquivo CSV de timetable. Ele deve conter, exatamente, as colunas: \texttt{Day}, \texttt{Hour}, \texttt{Students Sets}, \texttt{Subject}, \texttt{Teachers} e \texttt{Room}.
+  \item O campo \texttt{Hour} deve seguir o padrão do FET, por exemplo \texttt{7h30 - 8h00}. O gerador normaliza o resultado para \texttt{07:30 - 08:00}.
+  \item Para uma nova versão, defina antecipadamente o nome e a data de início. Exemplo: \texttt{2026.2.1} e \texttt{2026-08-06}.
+\end{enumerate}
+
+No terminal PowerShell, entre na pasta e sincronize o repositório antes de começar:
+\begin{lstlisting}
+Set-Location 'C:\Users\sergi\Desktop\MEGA Note\PYTHON\ifpisrn-horarios'
+git switch main
+git pull --ff-only origin main
+npm ci
+git status --short
+\end{lstlisting}
+Se houver alterações não relacionadas ou arquivos pessoais, não os apague nem os inclua no commit. Resolva ou guarde apenas o que for seu antes de continuar.
+
+\section{Publicar uma nova versão relevante}
+Use este fluxo quando o novo CSV representa uma mudança de semestre, uma nova grade ou um histórico que deve permanecer disponível.
+
+\subsection{1. Conferir a versão atual}
+\begin{lstlisting}
+Get-Content src\data\siteVersions.json
+git log --oneline -5
+\end{lstlisting}
+Anote a versão atual. Ela será congelada automaticamente como versão histórica. Nunca execute o gerador antes do criador de versão: se fizer isso, a cópia histórica guardará o horário novo, e não o antigo.
+
+\subsection{2. Criar o histórico e tornar a nova versão atual}
+Exemplo para publicar a versão \texttt{2026.2.1}, vigente a partir de 6 de agosto de 2026:
+\begin{lstlisting}
+npm run bump:timetable:version -- --new 2026.2.1 --start 2026-08-06
+\end{lstlisting}
+O comando faz quatro coisas: cria a cópia da versão atual em \texttt{versioned\_docs}; atualiza \texttt{versions.json}; fecha a vigência da versão anterior no dia anterior; e registra a nova versão em \texttt{src/data/siteVersions.json}. O menu Versão agrupa automaticamente por semestre, por exemplo \texttt{2026.2} acima de \texttt{2026.1}.
+
+\subsection{3. Gerar páginas a partir do CSV}
+Informe o caminho absoluto do CSV entre aspas:
+\begin{lstlisting}
+npm run generate:fet:csv -- 'C:\Users\sergi\fet-results\csv\20262bomhorario3\20262bomhorario3_timetable.csv'
+\end{lstlisting}
+O gerador remove e recria somente \texttt{docs/professor}, \texttt{docs/turma} e \texttt{docs/sala}. Ele agrupa aulas idênticas e consecutivas de 30 minutos em um bloco único, divide turmas por curso no menu e não gera sala para o valor \texttt{Indefinido}.
+
+\subsection{4. Conferir o resultado antes de publicar}
+\begin{lstlisting}
+Get-Content src\data\siteVersions.json
+Get-ChildItem docs\professor -Filter *.mdx | Measure-Object
+Get-ChildItem docs\turma -Directory | Select-Object Name
+Get-ChildItem docs\sala -Filter *.mdx | Measure-Object
+git status --short
+git diff --stat
+\end{lstlisting}
+Confira especialmente: nomes de turmas, professores e salas; links entre os horários; agrupamento de blocos consecutivos; ordem dos cursos; e a data final da versão anterior. Se o CSV introduzir uma nova forma de nomear um curso, atualize o mapa \texttt{COURSE\_POSITIONS} em \texttt{scripts/fet-csv-to-mdx.mjs} para manter a ordem do menu.
+
+\subsection{5. Compilar e testar}
+\begin{lstlisting}
+npm run typecheck
+npm run docusaurus -- build --out-dir build-validation
+\end{lstlisting}
+Em seguida, opcionalmente sirva o resultado para teste manual:
+\begin{lstlisting}
+npm run docusaurus -- serve --dir build-validation
+\end{lstlisting}
+Abra o endereço informado. Teste a busca, uma turma, um professor, uma sala, o menu Versão e ao menos uma página histórica. Interrompa o servidor com \texttt{Ctrl+C}. A pasta de validação é descartável e não deve ser enviada ao Git.
+
+\subsection{6. Commit, push e acompanhamento do deploy}
+Inclua somente os arquivos esperados. Não use \texttt{git add -A} se houver arquivos pessoais no status.
+\begin{lstlisting}
+git add docs/professor docs/turma docs/sala versioned_docs versioned_sidebars
+git add versions.json src/data/siteVersions.json scripts/fet-csv-to-mdx.mjs
+git diff --cached --check
+git commit -m 'Publish 2026.2.1 timetable'
+git push origin main
+gh run list -R profsergiocastro/ifpisrn-horarios -w 'Deploy to GitHub Pages' -L 1
+\end{lstlisting}
+Copie o identificador da execução exibida e acompanhe até o fim:
+\begin{lstlisting}
+gh run watch ID_DA_EXECUCAO -R profsergiocastro/ifpisrn-horarios --interval 10 --exit-status
+\end{lstlisting}
+Quando a execução terminar com sucesso, confira o site publicado em \url{https://profsergiocastro.github.io/ifpisrn-horarios/}.
+
+\section{Atualização pontual da versão atual}
+Use este fluxo se o CSV novo corrige apenas detalhes e deve continuar dentro da mesma versão atual. \textbf{Não execute} \texttt{bump:timetable:version}.
+\begin{lstlisting}
+Set-Location 'C:\Users\sergi\Desktop\MEGA Note\PYTHON\ifpisrn-horarios'
+git switch main
+git pull --ff-only origin main
+npm run generate:fet:csv -- 'CAMINHO_COMPLETO_DO_CSV.csv'
+npm run typecheck
+npm run docusaurus -- build --out-dir build-validation
+git add docs/professor docs/turma docs/sala
+git diff --cached --check
+git commit -m 'Update current timetable'
+git push origin main
+\end{lstlisting}
+Depois, acompanhe o GitHub Pages como na seção anterior. O arquivo \texttt{siteVersions.json} deve manter exatamente a mesma versão e data de início.
+
+\section{Marcar uma publicação como estável}
+Somente faça isso depois de testar o site publicado. O comando abaixo move o branch de referência \texttt{stable} para o commit atual e cria uma tag anotada. Use uma data ainda não usada.
+\begin{lstlisting}
+git switch main
+git pull --ff-only origin main
+git branch -f stable main
+git tag -a stable-AAAA-MM-DD -m 'Stable release AAAA-MM-DD' main
+git push --force-with-lease origin stable
+git push origin stable-AAAA-MM-DD
+\end{lstlisting}
+Para consultar referências estáveis existentes:
+\begin{lstlisting}
+git log -1 --oneline refs/heads/stable
+git tag --list 'stable*'
+\end{lstlisting}
+
+\section{Retornar à última versão estável}
+Não faça isso sem confirmar que o objetivo é desfazer mudanças recentes. Primeiro veja o commit estável:
+\begin{lstlisting}
+git show --stat refs/heads/stable
+\end{lstlisting}
+Para restaurar \texttt{main} para o estado estável e publicar novamente, use:
+\begin{lstlisting}
+git switch main
+git reset --hard refs/heads/stable
+git push --force-with-lease origin main
+\end{lstlisting}
+O GitHub Pages fará um novo deploy automaticamente. Este procedimento substitui o histórico remoto de \texttt{main}; execute-o somente com autorização explícita.
+
+\section{Erros comuns}
+\begin{longtable}{p{0.32\textwidth}p{0.61\textwidth}}
+\toprule
+Sintoma & Ação recomendada \\
+\midrule
+CSV sem páginas ou com poucas páginas & Confirme as seis colunas obrigatórias e se o CSV é o timetable, não outro relatório do FET. \\
+Versão antiga com horário novo & O gerador foi executado antes do snapshot. Restaure a versão anterior pelo Git e repita na ordem correta. \\
+Curso em ordem errada & Acrescente o nome normalizado do curso a \texttt{COURSE\_POSITIONS} no gerador. \\
+Build bloqueado por \texttt{EBUSY} no Windows & Feche processos que usam \texttt{build} e use \texttt{--out-dir build-validation}. \\
+Site não atualiza & Verifique a execução no GitHub Actions e aguarde a conclusão do job \texttt{deploy}. \\
+Links da busca levam para versão antiga & Confirme que as páginas foram geradas em \texttt{docs/}, não em \texttt{versioned\_docs}, e que a build foi refeita. \\
+\bottomrule
+\end{longtable}
+
+\section{Checklist final}
+\begin{enumerate}[leftmargin=*]
+  \item A versão e a data de início estão corretas em \texttt{src/data/siteVersions.json}.
+  \item Uma nova versão relevante preservou a anterior antes da geração do CSV.
+  \item Os diretórios de professor, turma e sala correspondem ao CSV novo.
+  \item \texttt{npm run typecheck} e a build terminaram sem erros.
+  \item O commit não contém arquivos pessoais nem pastas temporárias.
+  \item O GitHub Pages concluiu com sucesso e o site foi verificado.
+  \item O branch \texttt{stable} só foi atualizado após aprovação explícita.
+\end{enumerate}
+\end{document}
