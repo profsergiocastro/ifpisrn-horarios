@@ -1,0 +1,67 @@
+---
+slug: /turma/licenciatura_em_fisica_9_periodo_noite_119
+description: Licenciatura em Física - 9º Período (Noite) 119
+sidebar_label: "9º Período (Noite) 119"
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Licenciatura em Física - 9º Período (Noite) 119",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Trabalho de Conclusão de Curso II",
+        "size": 1,
+        "teachers": [
+          "Railton Vieira dos Santos"
+        ],
+        "classroom": "Sala 21",
+        "students": [
+          "Licenciatura em Física - 9º Período (Noite) 119"
+        ],
+        "time": "21:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Licenciatura em Física - 9º Período (Noite) 119
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

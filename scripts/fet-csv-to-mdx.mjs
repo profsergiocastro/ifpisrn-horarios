@@ -159,25 +159,30 @@ function splitCourseAndTurma(fullName) {
   return { courseName: match[1].trim(), turmaLabel: match[2].trim() }
 }
 
-const COURSE_ORDER = [
-  'tec_em_administracao_integrado',
-  'tec_em_eventos_integrado',
-  'tec_em_informatica_integrado',
-  'tec_em_administracao_subsequente',
-  'tec_em_guia_de_turismo_subsequente',
-  'tec_gastronomia',
-  'tec_gastronomia_proeja',
-  'lic_em_matematica',
-  'lic_em_fisica',
-  'sistemas_para_internet',
-  'tecnologia_em_gastronomia',
-]
+const COURSE_POSITIONS = new Map([
+  ['tec_em_administracao_integrado', 1],
+  ['tecnico_integrado_em_administracao_integrado', 1],
+  ['tec_em_eventos_integrado', 2],
+  ['tecnico_integrado_em_eventos_integrado', 2],
+  ['tec_em_informatica_integrado', 3],
+  ['tecnico_integrado_em_informatica_integrado', 3],
+  ['tec_em_administracao_subsequente', 4],
+  ['tec_em_guia_de_turismo_subsequente', 5],
+  ['tecnico_em_guia_de_turismo_subsequente', 5],
+  ['tec_gastronomia', 6],
+  ['tec_gastronomia_proeja', 7],
+  ['tecnico_em_gastronomia_proeja', 7],
+  ['lic_em_matematica', 8],
+  ['licenciatura_em_matematica', 8],
+  ['lic_em_fisica', 9],
+  ['licenciatura_em_fisica', 9],
+  ['sistemas_para_internet', 10],
+  ['tecnologia_em_gastronomia', 11],
+])
 
 function getCoursePosition(courseName) {
   const key = createURL(courseName)
-  const index = COURSE_ORDER.indexOf(key)
-  if (index === -1) return 9999
-  return index + 1
+  return COURSE_POSITIONS.get(key) ?? 9999
 }
 
 async function main() {
