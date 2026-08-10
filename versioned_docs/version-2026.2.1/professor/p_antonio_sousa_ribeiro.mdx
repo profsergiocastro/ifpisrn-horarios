@@ -1,0 +1,106 @@
+---
+slug: /professor/antonio_sousa_ribeiro
+description: Antonio Sousa Ribeiro
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Antonio Sousa Ribeiro",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": [
+      {
+        "subject": "Física Moderna I",
+        "size": 1,
+        "teachers": [
+          "Antonio Sousa Ribeiro"
+        ],
+        "classroom": "LAEPE",
+        "students": [
+          "Licenciatura em Física - 7º Período (Tarde) 725"
+        ],
+        "time": "14:00 - 16:00",
+        "color": ""
+      },
+      {
+        "subject": "Óptica",
+        "size": 1,
+        "teachers": [
+          "Antonio Sousa Ribeiro"
+        ],
+        "classroom": "LAEPE",
+        "students": [
+          "Licenciatura em Física - 8º Período (Noite) 119"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Física Moderna I",
+        "size": 1,
+        "teachers": [
+          "Antonio Sousa Ribeiro"
+        ],
+        "classroom": "LAEPE",
+        "students": [
+          "Licenciatura em Física - 7º Período (Tarde) 725"
+        ],
+        "time": "14:00 - 16:00",
+        "color": ""
+      },
+      {
+        "subject": "Óptica",
+        "size": 1,
+        "teachers": [
+          "Antonio Sousa Ribeiro"
+        ],
+        "classroom": "LAEPE",
+        "students": [
+          "Licenciatura em Física - 8º Período (Noite) 119"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Antonio Sousa Ribeiro
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

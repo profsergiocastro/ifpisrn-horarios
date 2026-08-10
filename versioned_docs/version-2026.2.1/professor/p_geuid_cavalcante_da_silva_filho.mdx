@@ -1,0 +1,106 @@
+---
+slug: /professor/geuid_cavalcante_da_silva_filho
+description: Geuid Cavalcante da Silva Filho
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Geuid Cavalcante da Silva Filho",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Educação Profissional e Tecnológica",
+        "size": 1,
+        "teachers": [
+          "Geuid Cavalcante da Silva Filho"
+        ],
+        "classroom": "Sala 01",
+        "students": [
+          "Licenciatura em Física - 8º Período (Tarde) 725"
+        ],
+        "time": "14:00 - 16:00",
+        "color": ""
+      },
+      {
+        "subject": "Política e Organização da Educação Nacional",
+        "size": 1,
+        "teachers": [
+          "Geuid Cavalcante da Silva Filho"
+        ],
+        "classroom": "Sala 22",
+        "students": [
+          "Licenciatura em Física - 2º Período (Noite) 725"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Política e Organização da Educação Nacional",
+        "size": 1,
+        "teachers": [
+          "Geuid Cavalcante da Silva Filho"
+        ],
+        "classroom": "Sala 22",
+        "students": [
+          "Licenciatura em Matemática - 2º Período (Tarde - PPC 2023)"
+        ],
+        "time": "14:00 - 16:00",
+        "color": ""
+      },
+      {
+        "subject": "Avaliação da Aprendizagem",
+        "size": 1,
+        "teachers": [
+          "Geuid Cavalcante da Silva Filho"
+        ],
+        "classroom": "Sala 18",
+        "students": [
+          "Licenciatura em Matemática - 6º Período (Noite - PPC 2023)"
+        ],
+        "time": "19:00 - 21:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Geuid Cavalcante da Silva Filho
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

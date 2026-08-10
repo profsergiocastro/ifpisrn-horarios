@@ -1,0 +1,80 @@
+---
+slug: /professor/paul_symon_ribeiro_rocha
+description: Paul Symon Ribeiro Rocha
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Paul Symon Ribeiro Rocha",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": [
+      {
+        "subject": "Práticas de Extensão I",
+        "size": 1,
+        "teachers": [
+          "Paul Symon Ribeiro Rocha"
+        ],
+        "classroom": "Sala 13",
+        "students": [
+          "Sistemas para Internet - 2º Período (Noite)"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Elaboração de Projeto",
+        "size": 1,
+        "teachers": [
+          "Paul Symon Ribeiro Rocha"
+        ],
+        "classroom": "Laboratório de Informática 2",
+        "students": [
+          "Sistemas para Internet - 4º Período (Noite)"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Paul Symon Ribeiro Rocha
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

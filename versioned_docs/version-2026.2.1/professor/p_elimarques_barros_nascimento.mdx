@@ -1,0 +1,132 @@
+---
+slug: /professor/elimarques_barros_nascimento
+description: Elimarques Barros Nascimento
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Elimarques Barros Nascimento",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": [
+      {
+        "subject": "Contabilidade Geral",
+        "size": 1,
+        "teachers": [
+          "Elimarques Barros Nascimento"
+        ],
+        "classroom": "Sala 13",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 1º ADM (Manhã)"
+        ],
+        "time": "07:30 - 08:30",
+        "color": ""
+      },
+      {
+        "subject": "Custos, Processos e Operações Contábeis",
+        "size": 1,
+        "teachers": [
+          "Elimarques Barros Nascimento"
+        ],
+        "classroom": "Sala 08",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 2º ADM (Manhã)"
+        ],
+        "time": "10:00 - 12:00",
+        "color": ""
+      },
+      {
+        "subject": "Contabilidade Básica",
+        "size": 1,
+        "teachers": [
+          "Elimarques Barros Nascimento"
+        ],
+        "classroom": "Sala 18",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 3º EVENTOS (Tarde)"
+        ],
+        "time": "13:30 - 15:30",
+        "color": ""
+      },
+      {
+        "subject": "Custos, Processos e Operações Contábeis",
+        "size": 1,
+        "teachers": [
+          "Elimarques Barros Nascimento"
+        ],
+        "classroom": "Sala 10",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 2º ADM (Tarde)"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": [
+      {
+        "subject": "Custos, Processos e Operações Contábeis",
+        "size": 1,
+        "teachers": [
+          "Elimarques Barros Nascimento"
+        ],
+        "classroom": "Sala 08",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 2º ADM (Manhã)"
+        ],
+        "time": "07:30 - 09:30",
+        "color": ""
+      },
+      {
+        "subject": "Custos, Processos e Operações Contábeis",
+        "size": 1,
+        "teachers": [
+          "Elimarques Barros Nascimento"
+        ],
+        "classroom": "Sala 10",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 2º ADM (Tarde)"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Elimarques Barros Nascimento
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

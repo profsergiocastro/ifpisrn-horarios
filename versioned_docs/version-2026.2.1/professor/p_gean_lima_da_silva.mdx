@@ -1,0 +1,158 @@
+---
+slug: /professor/gean_lima_da_silva
+description: Gean Lima da Silva
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Gean Lima da Silva",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": [
+      {
+        "subject": "Educação Física",
+        "size": 1,
+        "teachers": [
+          "Gean Lima da Silva"
+        ],
+        "classroom": "Sala 08",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 2º ADM (Manhã)"
+        ],
+        "time": "07:30 - 09:30",
+        "color": ""
+      },
+      {
+        "subject": "Educação Física",
+        "size": 1,
+        "teachers": [
+          "Gean Lima da Silva"
+        ],
+        "classroom": "Sala 10",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 2º ADM (Tarde)"
+        ],
+        "time": "10:00 - 12:00",
+        "color": ""
+      },
+      {
+        "subject": "Educação Física",
+        "size": 1,
+        "teachers": [
+          "Gean Lima da Silva"
+        ],
+        "classroom": "Sala 15",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 1º EVENTOS (Tarde)"
+        ],
+        "time": "13:30 - 14:30",
+        "color": ""
+      },
+      {
+        "subject": "Projeto Integrador IIB",
+        "size": 1,
+        "teachers": [
+          "Gean Lima da Silva"
+        ],
+        "classroom": "Sala 16",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 2º INFO (Tarde)"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": [
+      {
+        "subject": "Educação Física",
+        "size": 1,
+        "teachers": [
+          "Gean Lima da Silva"
+        ],
+        "classroom": "Sala 13",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 1º ADM (Manhã)"
+        ],
+        "time": "07:30 - 08:30",
+        "color": ""
+      },
+      {
+        "subject": "Educação Física",
+        "size": 1,
+        "teachers": [
+          "Gean Lima da Silva"
+        ],
+        "classroom": "Sala 14",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 1º INFO (Manhã)"
+        ],
+        "time": "08:30 - 09:30",
+        "color": ""
+      },
+      {
+        "subject": "Educação Física",
+        "size": 1,
+        "teachers": [
+          "Gean Lima da Silva"
+        ],
+        "classroom": "Sala 01",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 1º EVENTOS (Manhã)"
+        ],
+        "time": "11:00 - 12:00",
+        "color": ""
+      },
+      {
+        "subject": "Educação Física",
+        "size": 1,
+        "teachers": [
+          "Gean Lima da Silva"
+        ],
+        "classroom": "Sala 16",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 2º INFO (Tarde)"
+        ],
+        "time": "13:30 - 15:30",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Gean Lima da Silva
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>
