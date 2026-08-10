@@ -46,6 +46,13 @@ body {
   box-shadow: 0px 1px 2px rgb(0, 0, 0, 0.1);
 }
 
+/* Campus info dropdown: only in the mobile (hamburger) menu, hidden on desktop navbar */
+@media (min-width: 997px) {
+  .navbar__item.dropdown:has(.campusInfoNavbarDropdown) {
+    display: none;
+  }
+}
+
 .container {
   height: 100%;
 }

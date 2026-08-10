@@ -107,6 +107,115 @@ const config: Config = {
           position: 'left',
         },
         {
+          type: 'dropdown',
+          position: 'left',
+          label: 'Informações do Campus',
+          className: 'campusInfoNavbarDropdown',
+          items: [
+            {
+              type: 'doc',
+              docId: 'campus/administracao',
+              label: 'Administração',
+            },
+            {
+              type: 'doc',
+              docId: 'campus/setor-de-saude',
+              label: 'Setor de Saúde',
+            },
+            {
+              type: 'doc',
+              docId: 'campus/calendario-academico',
+              label: 'Calendário Acadêmico',
+            },
+            {
+              type: 'html',
+              value: '<div class="sidebarSectionHeading">CURSOS TÉCNICOS</div>',
+            },
+            {
+              type: 'doc',
+              docId: 'cursos/tecnico-administracao-integrado',
+              label: 'Administração (Integrado)',
+            },
+            {
+              type: 'doc',
+              docId: 'cursos/tecnico-eventos-integrado',
+              label: 'Eventos (Integrado)',
+            },
+            {
+              type: 'doc',
+              docId: 'cursos/tecnico-informatica-integrado',
+              label: 'Informática (Integrado)',
+            },
+            {
+              type: 'doc',
+              docId: 'cursos/tecnico-administracao-subsequente',
+              label: 'Administração (Subsequente)',
+            },
+            {
+              type: 'doc',
+              docId: 'cursos/tecnico-gastronomia-subsequente',
+              label: 'Gastronomia (Subsequente)',
+            },
+            {
+              type: 'doc',
+              docId: 'cursos/tecnico-guia-de-turismo-subsequente',
+              label: 'Guia de Turismo (Subsequente)',
+            },
+            {
+              type: 'doc',
+              docId: 'cursos/tecnico-servico-de-restaurante-e-bar',
+              label: 'Serviço de Restaurante e Bar (Subsequente)',
+            },
+            {
+              type: 'doc',
+              docId: 'cursos/tecnico-gastronomia-proeja',
+              label: 'Gastronomia (PROEJA)',
+            },
+            {
+              type: 'html',
+              value: '<div class="sidebarSectionHeading">LICENCIATURA</div>',
+            },
+            {
+              type: 'doc',
+              docId: 'cursos/licenciatura-fisica',
+              label: 'Licenciatura em Física',
+            },
+            {
+              type: 'doc',
+              docId: 'cursos/licenciatura-matematica',
+              label: 'Licenciatura em Matemática',
+            },
+            {
+              type: 'html',
+              value: '<div class="sidebarSectionHeading">TECNOLOGIA</div>',
+            },
+            {
+              type: 'doc',
+              docId: 'cursos/tecnologia-gastronomia',
+              label: 'Gastronomia',
+            },
+            {
+              type: 'doc',
+              docId: 'cursos/tecnologia-sistemas-para-internet',
+              label: 'Sistemas para Internet',
+            },
+            {
+              type: 'html',
+              value: '<div class="sidebarSectionHeading">CONTATO</div>',
+            },
+            {
+              type: 'html',
+              value:
+                '<div class="campusInfoSubItem campusInfoSubItem--telefone"><span class="campusInfoSubItem__label">Telefone</span><span class="campusInfoSubItem__value">(89) 2221-9904</span></div>',
+            },
+            {
+              type: 'html',
+              value:
+                '<div class="campusInfoSubItem campusInfoSubItem--endereco"><span class="campusInfoSubItem__label">Endereço</span><span class="campusInfoSubItem__value">BR 020, S/N, Bairro Primavera, São Raimundo Nonato - PI, CEP 64770-000</span></div>',
+            },
+          ],
+        },
+        {
           type: 'search',
           position: 'right',
         },
