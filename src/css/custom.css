@@ -46,11 +46,58 @@ body {
   box-shadow: 0px 1px 2px rgb(0, 0, 0, 0.1);
 }
 
-/* Campus info dropdown: only in the mobile (hamburger) menu, hidden on desktop navbar */
+/* Campus info menu: only in the mobile (hamburger) menu, hidden on desktop navbar */
 @media (min-width: 997px) {
-  .navbar__item.dropdown:has(.campusInfoNavbarDropdown) {
+  .campusInfoNavbarDropdown {
     display: none;
   }
+}
+
+/* Native collapsible menu (details/summary) mirrors the docs sidebar campus info layout */
+.campusInfoNavbarDropdown summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.campusInfoNavbarDropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.campusInfoNavbarDropdown details > summary.menu__link--sublist-caret::after {
+  transform: rotate(180deg);
+}
+
+.campusInfoNavbarDropdown details:not([open]) > summary.menu__link--sublist-caret::after {
+  transform: rotate(90deg);
+}
+
+/* The sidebar rules target <a.menu__link--sublist>; here the submenu toggle is a <summary> */
+.campusInfoNavbarDropdown .campusInfoItem > details.menu__list-item-collapsible > summary.menu__link--sublist {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.campusInfoNavbarDropdown .campusInfoItem > details.menu__list-item-collapsible > summary.menu__link--sublist::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px 20px;
+}
+
+.campusInfoNavbarDropdown .campusInfoItem--cursos > details.menu__list-item-collapsible > summary.menu__link--sublist::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%232e7d32' d='M12 3 1 9l11 6 9-4.91V17h2V9L12 3Zm0 13L3.74 11.5 12 7l8.26 4.5L12 16Zm-6 2v-4.5l6 3.27 6-3.27V18c0 2.21-4 4-6 4s-6-1.79-6-4Z'/%3E%3C/svg%3E");
+}
+
+.campusInfoNavbarDropdown .campusInfoItem--contato > details.menu__list-item-collapsible > summary.menu__link--sublist::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%238e24aa' d='M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.24 1.02l-2.2 2.2Z'/%3E%3C/svg%3E");
+}
+
+.campusInfoNavbarDropdown .campusCourseType > details.menu__list-item-collapsible > summary.menu__link--sublist {
+  font-weight: 800;
 }
 
 .container {
