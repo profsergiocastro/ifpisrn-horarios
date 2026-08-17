@@ -1,0 +1,119 @@
+---
+slug: /professor/marcelo_bruno_araujo_queiroz
+description: Marcelo Bruno Araujo Queiroz
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Marcelo Bruno Araujo Queiroz",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": [
+      {
+        "subject": "Gestão e Organização Escolar",
+        "size": 1,
+        "teachers": [
+          "Marcelo Bruno Araujo Queiroz"
+        ],
+        "classroom": "Laboratório de Artes",
+        "students": [
+          "Licenciatura em Física - 4º Período (Tarde) 725"
+        ],
+        "time": "14:00 - 16:00",
+        "color": ""
+      },
+      {
+        "subject": "Educação de Jovens e Adultos",
+        "size": 1,
+        "teachers": [
+          "Marcelo Bruno Araujo Queiroz"
+        ],
+        "classroom": "Laboratório de Artes",
+        "students": [
+          "Licenciatura em Física - 4º Período (Tarde) 725"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      },
+      {
+        "subject": "Metodologia do Ensino de Matemática",
+        "size": 1,
+        "teachers": [
+          "Marcelo Bruno Araujo Queiroz"
+        ],
+        "classroom": "Sala 01",
+        "students": [
+          "Licenciatura em Matemática - PPC 2016 (A)"
+        ],
+        "time": "18:00 - 21:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Educação de Jovens e Adultos",
+        "size": 1,
+        "teachers": [
+          "Marcelo Bruno Araujo Queiroz"
+        ],
+        "classroom": "Laboratório de Artes",
+        "students": [
+          "Licenciatura em Física - 4º Período (Tarde) 725"
+        ],
+        "time": "14:00 - 15:00",
+        "color": ""
+      },
+      {
+        "subject": "Gestão e Organização Escolar",
+        "size": 1,
+        "teachers": [
+          "Marcelo Bruno Araujo Queiroz"
+        ],
+        "classroom": "Laboratório de Artes",
+        "students": [
+          "Licenciatura em Física - 4º Período (Tarde) 725"
+        ],
+        "time": "15:00 - 16:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Marcelo Bruno Araujo Queiroz
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

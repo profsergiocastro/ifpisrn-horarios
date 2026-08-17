@@ -1,0 +1,93 @@
+---
+slug: /professor/sergio_augusto_dias_castro
+description: Sérgio Augusto Dias Castro
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Sérgio Augusto Dias Castro",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": [
+      {
+        "subject": "Matemática",
+        "size": 1,
+        "teachers": [
+          "Sérgio Augusto Dias Castro"
+        ],
+        "classroom": "Sala 18",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 3º EVENTOS (Tarde)"
+        ],
+        "time": "13:30 - 14:30",
+        "color": ""
+      },
+      {
+        "subject": "Prática Profissional IV",
+        "size": 1,
+        "teachers": [
+          "Sérgio Augusto Dias Castro"
+        ],
+        "classroom": "Sala 01",
+        "students": [
+          "Licenciatura em Matemática - PPC 2016 (A)"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Matemática",
+        "size": 1,
+        "teachers": [
+          "Sérgio Augusto Dias Castro"
+        ],
+        "classroom": "Sala 18",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 3º EVENTOS (Tarde)"
+        ],
+        "time": "13:30 - 15:30",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Sérgio Augusto Dias Castro
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

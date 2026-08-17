@@ -1,0 +1,119 @@
+---
+slug: /professor/flavia_oliveira_da_silva_louzeiro
+description: Flavia Oliveira da Silva Louzeiro
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Flavia Oliveira da Silva Louzeiro",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": [
+      {
+        "subject": "Projeto Integrador IV",
+        "size": 1,
+        "teachers": [
+          "Flavia Oliveira da Silva Louzeiro"
+        ],
+        "classroom": "Sala 07",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 2º EVENTOS (Manhã)"
+        ],
+        "time": "13:30 - 15:30",
+        "color": ""
+      },
+      {
+        "subject": "Prática Profissional I - Planejamento, Organização e execução de Eventos Social e/ou Esportivo;",
+        "size": 1,
+        "teachers": [
+          "Flavia Oliveira da Silva Louzeiro"
+        ],
+        "classroom": "Sala 01",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 1º EVENTOS (Manhã)"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      },
+      {
+        "subject": "Agenciamento de Viagem e Transportes",
+        "size": 1,
+        "teachers": [
+          "Flavia Oliveira da Silva Louzeiro"
+        ],
+        "classroom": "Sala 16",
+        "students": [
+          "Técnico em Guia de Turismo (Subsequente) - Módulo II (Noite)"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      },
+      {
+        "subject": "Teoria e Técnica Profissional II",
+        "size": 1,
+        "teachers": [
+          "Flavia Oliveira da Silva Louzeiro"
+        ],
+        "classroom": "Sala 16",
+        "students": [
+          "Técnico em Guia de Turismo (Subsequente) - Módulo II (Noite)"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Teoria e Técnica Profissional II",
+        "size": 1,
+        "teachers": [
+          "Flavia Oliveira da Silva Louzeiro"
+        ],
+        "classroom": "Sala 16",
+        "students": [
+          "Técnico em Guia de Turismo (Subsequente) - Módulo II (Noite)"
+        ],
+        "time": "21:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Flavia Oliveira da Silva Louzeiro
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

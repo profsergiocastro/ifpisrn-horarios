@@ -1,0 +1,79 @@
+---
+slug: /professor/evanir_de_araujo_santos
+description: Evanir de Araujo Santos
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Evanir de Araujo Santos",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Confeitaria",
+        "size": 1,
+        "teachers": [
+          "Evanir de Araujo Santos"
+        ],
+        "classroom": "Sala 21",
+        "students": [
+          "Tecnologia em Gastronomia - 4º Período (Tarde)"
+        ],
+        "time": "14:00 - 18:00",
+        "color": ""
+      },
+      {
+        "subject": "Confeitaria e Panificação",
+        "size": 1,
+        "teachers": [
+          "Evanir de Araujo Santos"
+        ],
+        "classroom": "Sala 08",
+        "students": [
+          "Técnico em Gastronomia (PROEJA) - 6º Período (Noite)"
+        ],
+        "time": "18:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Evanir de Araujo Santos
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

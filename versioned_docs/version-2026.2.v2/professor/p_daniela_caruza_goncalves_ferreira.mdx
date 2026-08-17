@@ -1,0 +1,119 @@
+---
+slug: /professor/daniela_caruza_goncalves_ferreira
+description: Daniela Caruza Gonçalves Ferreira
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Daniela Caruza Gonçalves Ferreira",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Complementar IV – Estudo dos Programas e Legislações de Incentivo à Cultura e Eventos (Local, Regional e Nacional)",
+        "size": 1,
+        "teachers": [
+          "Daniela Caruza Gonçalves Ferreira"
+        ],
+        "classroom": "Sala 07",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 2º EVENTOS (Manhã)"
+        ],
+        "time": "13:30 - 15:30",
+        "color": ""
+      },
+      {
+        "subject": "Prática Profissional VI - Organização e Execução de Evento Artístico Cultural",
+        "size": 1,
+        "teachers": [
+          "Daniela Caruza Gonçalves Ferreira"
+        ],
+        "classroom": "Sala 18",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 3º EVENTOS (Tarde)"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      },
+      {
+        "subject": "Prática Profissional Nacional",
+        "size": 1,
+        "teachers": [
+          "Daniela Caruza Gonçalves Ferreira"
+        ],
+        "classroom": "Sala 16",
+        "students": [
+          "Técnico em Guia de Turismo (Subsequente) - Módulo II (Noite)"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      },
+      {
+        "subject": "Patrimônio Cultural Nacional",
+        "size": 1,
+        "teachers": [
+          "Daniela Caruza Gonçalves Ferreira"
+        ],
+        "classroom": "Sala 16",
+        "students": [
+          "Técnico em Guia de Turismo (Subsequente) - Módulo II (Noite)"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Prática Profissional Nacional",
+        "size": 1,
+        "teachers": [
+          "Daniela Caruza Gonçalves Ferreira"
+        ],
+        "classroom": "Sala 16",
+        "students": [
+          "Técnico em Guia de Turismo (Subsequente) - Módulo II (Noite)"
+        ],
+        "time": "18:00 - 21:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Daniela Caruza Gonçalves Ferreira
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

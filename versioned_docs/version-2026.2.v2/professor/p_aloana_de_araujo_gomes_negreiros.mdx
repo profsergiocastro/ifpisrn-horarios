@@ -1,0 +1,145 @@
+---
+slug: /professor/aloana_de_araujo_gomes_negreiros
+description: Aloana de Araujo Gomes Negreiros
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Aloana de Araujo Gomes Negreiros",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Educação e Saúde Financeira",
+        "size": 1,
+        "teachers": [
+          "Aloana de Araujo Gomes Negreiros"
+        ],
+        "classroom": "Sala 13",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 1º ADM (Manhã)"
+        ],
+        "time": "07:30 - 09:30",
+        "color": ""
+      },
+      {
+        "subject": "Mercado de Trabalho, Empreendedorismo e Ética",
+        "size": 1,
+        "teachers": [
+          "Aloana de Araujo Gomes Negreiros"
+        ],
+        "classroom": "Sala 14",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 1º INFO (Manhã)"
+        ],
+        "time": "10:00 - 12:00",
+        "color": ""
+      },
+      {
+        "subject": "Empreendedorismo e Marketing",
+        "size": 1,
+        "teachers": [
+          "Aloana de Araujo Gomes Negreiros"
+        ],
+        "classroom": "Sala 07",
+        "students": [
+          "Técnico em Gastronomia (PROEJA) - 5º Período (Noite)"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Arranjos Produtivos Locais e Cooperativismo",
+        "size": 1,
+        "teachers": [
+          "Aloana de Araujo Gomes Negreiros"
+        ],
+        "classroom": "Sala 17",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 3º ADM (Manhã)"
+        ],
+        "time": "07:30 - 09:30",
+        "color": ""
+      },
+      {
+        "subject": "Marketing Pessoal, Currículo e Oratória",
+        "size": 1,
+        "teachers": [
+          "Aloana de Araujo Gomes Negreiros"
+        ],
+        "classroom": "Sala 13",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 1º ADM (Manhã)"
+        ],
+        "time": "10:00 - 11:00",
+        "color": ""
+      },
+      {
+        "subject": "Gestão, Inovação, Sust. e Empreendedorismo",
+        "size": 1,
+        "teachers": [
+          "Aloana de Araujo Gomes Negreiros"
+        ],
+        "classroom": "Sala 17",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 3º ADM (Manhã)"
+        ],
+        "time": "11:00 - 12:00",
+        "color": ""
+      },
+      {
+        "subject": "Empreendedorismo e Marketing",
+        "size": 1,
+        "teachers": [
+          "Aloana de Araujo Gomes Negreiros"
+        ],
+        "classroom": "Sala 07",
+        "students": [
+          "Técnico em Gastronomia (PROEJA) - 5º Período (Noite)"
+        ],
+        "time": "18:00 - 19:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Aloana de Araujo Gomes Negreiros
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

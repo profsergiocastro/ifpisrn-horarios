@@ -1,0 +1,120 @@
+---
+slug: /professor/kelvin_lopes_de_castro
+description: Kelvin Lopes de Castro
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Kelvin Lopes de Castro",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": [
+      {
+        "subject": "Física",
+        "size": 1,
+        "teachers": [
+          "Kelvin Lopes de Castro"
+        ],
+        "classroom": "Sala 15",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 1º EVENTOS (Tarde)"
+        ],
+        "time": "14:30 - 15:30",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": [
+      {
+        "subject": "História da Física",
+        "size": 1,
+        "teachers": [
+          "Kelvin Lopes de Castro"
+        ],
+        "classroom": "Laboratório de Artes",
+        "students": [
+          "Licenciatura em Física - 4º Período (Tarde) 725"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Física",
+        "size": 1,
+        "teachers": [
+          "Kelvin Lopes de Castro"
+        ],
+        "classroom": "Sala 14",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 1º INFO (Manhã)"
+        ],
+        "time": "10:00 - 11:00",
+        "color": ""
+      },
+      {
+        "subject": "Instrumentação para o Ensino Médio",
+        "size": 1,
+        "teachers": [
+          "Kelvin Lopes de Castro"
+        ],
+        "classroom": "Sala 21",
+        "students": [
+          "Licenciatura em Física - 6º Período (Noite) 725"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      },
+      {
+        "subject": "Estágio Supervisionado II",
+        "size": 1,
+        "teachers": [
+          "Kelvin Lopes de Castro"
+        ],
+        "classroom": "Sala 21",
+        "students": [
+          "Licenciatura em Física - 6º Período (Noite) 725"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Kelvin Lopes de Castro
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

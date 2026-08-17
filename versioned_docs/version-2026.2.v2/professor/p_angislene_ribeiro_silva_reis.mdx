@@ -1,0 +1,119 @@
+---
+slug: /professor/angislene_ribeiro_silva_reis
+description: Angislene Ribeiro Silva Reis
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Angislene Ribeiro Silva Reis",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": [
+      {
+        "subject": "Língua Portuguesa",
+        "size": 1,
+        "teachers": [
+          "Angislene Ribeiro Silva Reis"
+        ],
+        "classroom": "Sala 20",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 3º INFO (Tarde)"
+        ],
+        "time": "13:30 - 15:30",
+        "color": ""
+      },
+      {
+        "subject": "Língua Portuguesa",
+        "size": 1,
+        "teachers": [
+          "Angislene Ribeiro Silva Reis"
+        ],
+        "classroom": "Sala 18",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 3º EVENTOS (Tarde)"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      },
+      {
+        "subject": "Comunicação Linguística e Redação Empresarial",
+        "size": 1,
+        "teachers": [
+          "Angislene Ribeiro Silva Reis"
+        ],
+        "classroom": "Sala 13",
+        "students": [
+          "Sistemas para Internet - 2º Período (Noite)"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": [
+      {
+        "subject": "Língua Portuguesa",
+        "size": 1,
+        "teachers": [
+          "Angislene Ribeiro Silva Reis"
+        ],
+        "classroom": "Sala 18",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 3º EVENTOS (Tarde)"
+        ],
+        "time": "14:30 - 15:30",
+        "color": ""
+      },
+      {
+        "subject": "Língua Portuguesa",
+        "size": 1,
+        "teachers": [
+          "Angislene Ribeiro Silva Reis"
+        ],
+        "classroom": "Sala 20",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 3º INFO (Tarde)"
+        ],
+        "time": "17:00 - 18:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Angislene Ribeiro Silva Reis
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

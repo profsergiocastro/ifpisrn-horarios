@@ -1,0 +1,93 @@
+---
+slug: /professor/girlanio_vidal_de_lima
+description: Girlanio Vidal de Lima
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Girlanio Vidal de Lima",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Empreendedorismo e Inovação",
+        "size": 1,
+        "teachers": [
+          "Girlanio Vidal de Lima"
+        ],
+        "classroom": "Sala 17",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 3º ADM (Manhã)"
+        ],
+        "time": "07:30 - 09:30",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Empreendedorismo e Inovação",
+        "size": 1,
+        "teachers": [
+          "Girlanio Vidal de Lima"
+        ],
+        "classroom": "Sala 17",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 3º ADM (Manhã)"
+        ],
+        "time": "07:30 - 09:30",
+        "color": ""
+      },
+      {
+        "subject": "Empreendedorismo",
+        "size": 1,
+        "teachers": [
+          "Girlanio Vidal de Lima"
+        ],
+        "classroom": "Sala 21",
+        "students": [
+          "Tecnologia em Gastronomia - 4º Período (Tarde)"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Girlanio Vidal de Lima
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>
