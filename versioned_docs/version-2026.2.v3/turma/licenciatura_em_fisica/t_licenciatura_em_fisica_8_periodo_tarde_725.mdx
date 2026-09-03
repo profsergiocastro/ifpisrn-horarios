@@ -1,0 +1,94 @@
+---
+slug: /turma/licenciatura_em_fisica_8_periodo_tarde_725
+description: Licenciatura em Física - 8º Período (Tarde) 725
+sidebar_label: "8º Período (Tarde) 725"
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Licenciatura em Física - 8º Período (Tarde) 725",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": [
+      {
+        "subject": "Estágio Supervisionado IV",
+        "size": 1,
+        "teachers": [
+          "Marcus Vinicius Oliveira Viana"
+        ],
+        "classroom": "Sala 01",
+        "students": [
+          "Licenciatura em Física - 8º Período (Tarde) 725"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Educação Profissional e Tecnológica",
+        "size": 1,
+        "teachers": [
+          "Geuid Cavalcante da Silva Filho"
+        ],
+        "classroom": "Sala 01",
+        "students": [
+          "Licenciatura em Física - 8º Período (Tarde) 725"
+        ],
+        "time": "14:00 - 16:00",
+        "color": ""
+      },
+      {
+        "subject": "Atividades de Extensão 6 - Execução e Resultados",
+        "size": 1,
+        "teachers": [
+          "Marciano Vieira de Andrade"
+        ],
+        "classroom": "Sala 01",
+        "students": [
+          "Licenciatura em Física - 8º Período (Tarde) 725"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Licenciatura em Física - 8º Período (Tarde) 725
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

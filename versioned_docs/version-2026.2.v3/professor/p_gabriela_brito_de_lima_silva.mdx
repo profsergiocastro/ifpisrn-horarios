@@ -1,0 +1,120 @@
+---
+slug: /professor/gabriela_brito_de_lima_silva
+description: Gabriela Brito de Lima Silva
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Gabriela Brito de Lima Silva",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": [
+      {
+        "subject": "Planejamento Extensionista",
+        "size": 1,
+        "teachers": [
+          "Gabriela Brito de Lima Silva"
+        ],
+        "classroom": "Sala 14",
+        "students": [
+          "Tecnologia em Gastronomia - 2º Período (Noite)"
+        ],
+        "time": "21:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": [
+      {
+        "subject": "Eventos para Gastronomia",
+        "size": 1,
+        "teachers": [
+          "Gabriela Brito de Lima Silva"
+        ],
+        "classroom": "Sala 21",
+        "students": [
+          "Tecnologia em Gastronomia - 4º Período (Tarde)"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      },
+      {
+        "subject": "Serviços de Bar e Restaurante",
+        "size": 1,
+        "teachers": [
+          "Gabriela Brito de Lima Silva"
+        ],
+        "classroom": "Sala 14",
+        "students": [
+          "Tecnologia em Gastronomia - 2º Período (Noite)"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Projeto Extensionista II",
+        "size": 1,
+        "teachers": [
+          "Gabriela Brito de Lima Silva"
+        ],
+        "classroom": "Sala 21",
+        "students": [
+          "Tecnologia em Gastronomia - 4º Período (Tarde)"
+        ],
+        "time": "14:00 - 16:00",
+        "color": ""
+      },
+      {
+        "subject": "Planejamento Extensionista",
+        "size": 1,
+        "teachers": [
+          "Gabriela Brito de Lima Silva"
+        ],
+        "classroom": "Sala 14",
+        "students": [
+          "Tecnologia em Gastronomia - 2º Período (Noite)"
+        ],
+        "time": "18:00 - 19:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Gabriela Brito de Lima Silva
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

@@ -1,0 +1,93 @@
+---
+slug: /professor/stanley_santiago_coelho
+description: Stanley Santiago Coelho
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Stanley Santiago Coelho",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": [
+      {
+        "subject": "Física",
+        "size": 1,
+        "teachers": [
+          "Stanley Santiago Coelho"
+        ],
+        "classroom": "Sala 19",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 3º INFO (Manhã)"
+        ],
+        "time": "07:30 - 09:30",
+        "color": ""
+      },
+      {
+        "subject": "Física Moderna II",
+        "size": 1,
+        "teachers": [
+          "Stanley Santiago Coelho"
+        ],
+        "classroom": "LAEPE",
+        "students": [
+          "Licenciatura em Física - 8º Período (Noite) 119"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": [
+      {
+        "subject": "Física Moderna II",
+        "size": 1,
+        "teachers": [
+          "Stanley Santiago Coelho"
+        ],
+        "classroom": "LAEPE",
+        "students": [
+          "Licenciatura em Física - 8º Período (Noite) 119"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Stanley Santiago Coelho
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

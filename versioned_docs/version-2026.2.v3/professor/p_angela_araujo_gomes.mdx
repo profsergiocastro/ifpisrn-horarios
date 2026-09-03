@@ -1,0 +1,132 @@
+---
+slug: /professor/angela_araujo_gomes
+description: Angela Araujo Gomes
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Angela Araujo Gomes",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": [
+      {
+        "subject": "Turismo, Hospitalidade e Entretenimento",
+        "size": 1,
+        "teachers": [
+          "Angela Araujo Gomes"
+        ],
+        "classroom": "Sala 01",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 1º EVENTOS (Manhã)"
+        ],
+        "time": "10:00 - 12:00",
+        "color": ""
+      },
+      {
+        "subject": "Turismo e Meio Ambiente Nacional",
+        "size": 1,
+        "teachers": [
+          "Angela Araujo Gomes"
+        ],
+        "classroom": "Sala 16",
+        "students": [
+          "Técnico em Guia de Turismo (Subsequente) - Módulo II (Noite)"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      },
+      {
+        "subject": "Segmentação do Turismo",
+        "size": 1,
+        "teachers": [
+          "Angela Araujo Gomes"
+        ],
+        "classroom": "Sala 16",
+        "students": [
+          "Técnico em Guia de Turismo (Subsequente) - Módulo II (Noite)"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": [
+      {
+        "subject": "Prática Profissional IV – Organização e Execução de Evento Técnico - Científicos",
+        "size": 1,
+        "teachers": [
+          "Angela Araujo Gomes"
+        ],
+        "classroom": "Sala 07",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 2º EVENTOS (Manhã)"
+        ],
+        "time": "10:00 - 12:00",
+        "color": ""
+      },
+      {
+        "subject": "Turismo, Hospitalidade e Entretenimento",
+        "size": 1,
+        "teachers": [
+          "Angela Araujo Gomes"
+        ],
+        "classroom": "Sala 15",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 1º EVENTOS (Tarde)"
+        ],
+        "time": "13:30 - 15:30",
+        "color": ""
+      },
+      {
+        "subject": "Projeto Integrador VI",
+        "size": 1,
+        "teachers": [
+          "Angela Araujo Gomes"
+        ],
+        "classroom": "Sala 18",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 3º EVENTOS (Tarde)"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Angela Araujo Gomes
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

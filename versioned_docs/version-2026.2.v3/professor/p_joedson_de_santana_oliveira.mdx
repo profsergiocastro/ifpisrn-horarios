@@ -1,0 +1,119 @@
+---
+slug: /professor/joedson_de_santana_oliveira
+description: Joedson de Santana Oliveira
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Joedson de Santana Oliveira",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": [
+      {
+        "subject": "Filosofia",
+        "size": 1,
+        "teachers": [
+          "Joedson de Santana Oliveira"
+        ],
+        "classroom": "Sala 17",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 3º ADM (Manhã)"
+        ],
+        "time": "07:30 - 09:30",
+        "color": ""
+      },
+      {
+        "subject": "Projeto Integrador IIIB",
+        "size": 1,
+        "teachers": [
+          "Joedson de Santana Oliveira"
+        ],
+        "classroom": "Sala 19",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 3º INFO (Manhã)"
+        ],
+        "time": "13:30 - 15:30",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Fundamentos Jurídicos do Direito Público",
+        "size": 1,
+        "teachers": [
+          "Joedson de Santana Oliveira"
+        ],
+        "classroom": "Sala 13",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 1º ADM (Manhã)"
+        ],
+        "time": "11:00 - 12:00",
+        "color": ""
+      },
+      {
+        "subject": "Filosofia",
+        "size": 1,
+        "teachers": [
+          "Joedson de Santana Oliveira"
+        ],
+        "classroom": "Sala 19",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 3º INFO (Manhã)"
+        ],
+        "time": "13:30 - 15:30",
+        "color": ""
+      },
+      {
+        "subject": "Filosofia",
+        "size": 1,
+        "teachers": [
+          "Joedson de Santana Oliveira"
+        ],
+        "classroom": "Sala 20",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 3º INFO (Tarde)"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Joedson de Santana Oliveira
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

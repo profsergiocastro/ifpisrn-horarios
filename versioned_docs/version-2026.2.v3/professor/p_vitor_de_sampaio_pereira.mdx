@@ -1,0 +1,132 @@
+---
+slug: /professor/vitor_de_sampaio_pereira
+description: Vitor de Sampaio Pereira
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Vitor de Sampaio Pereira",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": [
+      {
+        "subject": "Arte",
+        "size": 1,
+        "teachers": [
+          "Vitor de Sampaio Pereira"
+        ],
+        "classroom": "Sala 07",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 2º EVENTOS (Manhã)"
+        ],
+        "time": "07:30 - 09:30",
+        "color": ""
+      },
+      {
+        "subject": "Ciência, Tecnologia e Sociedade e Trabalho",
+        "size": 1,
+        "teachers": [
+          "Vitor de Sampaio Pereira"
+        ],
+        "classroom": "Sala 10",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 2º ADM (Tarde)"
+        ],
+        "time": "13:30 - 15:30",
+        "color": ""
+      },
+      {
+        "subject": "Arte e Criatividade",
+        "size": 1,
+        "teachers": [
+          "Vitor de Sampaio Pereira"
+        ],
+        "classroom": "Sala 15",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 1º EVENTOS (Tarde)"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": [
+      {
+        "subject": "Arte e Criatividade",
+        "size": 1,
+        "teachers": [
+          "Vitor de Sampaio Pereira"
+        ],
+        "classroom": "Sala 01",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 1º EVENTOS (Manhã)"
+        ],
+        "time": "13:30 - 15:30",
+        "color": ""
+      },
+      {
+        "subject": "Arte",
+        "size": 1,
+        "teachers": [
+          "Vitor de Sampaio Pereira"
+        ],
+        "classroom": "Sala 08",
+        "students": [
+          "Técnico em Gastronomia (PROEJA) - 6º Período (Noite)"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      },
+      {
+        "subject": "Planejamento Extensionista",
+        "size": 1,
+        "teachers": [
+          "Vitor de Sampaio Pereira"
+        ],
+        "classroom": "Sala 22",
+        "students": [
+          "Licenciatura em Física - 2º Período (Noite) 725"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Vitor de Sampaio Pereira
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

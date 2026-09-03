@@ -1,0 +1,79 @@
+---
+slug: /professor/lucimara_lais_zachow
+description: Lucimara Lais Zachow
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Lucimara Lais Zachow",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": [
+      {
+        "subject": "Química",
+        "size": 1,
+        "teachers": [
+          "Lucimara Lais Zachow"
+        ],
+        "classroom": "Sala 07",
+        "students": [
+          "Técnico em Gastronomia (PROEJA) - 5º Período (Noite)"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      },
+      {
+        "subject": "Química",
+        "size": 1,
+        "teachers": [
+          "Lucimara Lais Zachow"
+        ],
+        "classroom": "Sala 08",
+        "students": [
+          "Técnico em Gastronomia (PROEJA) - 6º Período (Noite)"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Lucimara Lais Zachow
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

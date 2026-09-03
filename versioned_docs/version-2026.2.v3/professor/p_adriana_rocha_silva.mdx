@@ -1,0 +1,134 @@
+---
+slug: /professor/adriana_rocha_silva
+description: Adriana Rocha Silva
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Adriana Rocha Silva",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": [
+      {
+        "subject": "Didática",
+        "size": 1,
+        "teachers": [
+          "Adriana Rocha Silva"
+        ],
+        "classroom": "Sala 15",
+        "students": [
+          "Licenciatura em Matemática - 4º Período (Noite - PPC 2023)"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      },
+      {
+        "subject": "Psicologia da Educação",
+        "size": 1,
+        "teachers": [
+          "Adriana Rocha Silva"
+        ],
+        "classroom": "Sala 15",
+        "students": [
+          "Licenciatura em Matemática - 4º Período (Noite - PPC 2023)"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": [
+      {
+        "subject": "Didática",
+        "size": 1,
+        "teachers": [
+          "Adriana Rocha Silva"
+        ],
+        "classroom": "Sala 15",
+        "students": [
+          "Licenciatura em Matemática - 4º Período (Noite - PPC 2023)"
+        ],
+        "time": "18:00 - 19:00",
+        "color": ""
+      },
+      {
+        "subject": "Psicologia da Educação",
+        "size": 1,
+        "teachers": [
+          "Adriana Rocha Silva"
+        ],
+        "classroom": "Sala 15",
+        "students": [
+          "Licenciatura em Matemática - 4º Período (Noite - PPC 2023)"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Tecnologias Aplicadas ao Ensino de Matemática",
+        "size": 1,
+        "teachers": [
+          "Adriana Rocha Silva"
+        ],
+        "classroom": "Laboratório de Informática 1",
+        "students": [
+          "Licenciatura em Matemática - 2º Período (Tarde - PPC 2023)"
+        ],
+        "time": "14:00 - 17:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Tecnologia da Educação",
+        "size": 1,
+        "teachers": [
+          "Adriana Rocha Silva"
+        ],
+        "classroom": "Sala 21",
+        "students": [
+          "Licenciatura em Física - 6º Período (Noite) 725"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Adriana Rocha Silva
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

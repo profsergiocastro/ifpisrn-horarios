@@ -1,0 +1,120 @@
+---
+slug: /professor/tania_gameleira_santos
+description: Tania Gameleira Santos
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Tania Gameleira Santos",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Gestão de Pessoas",
+        "size": 1,
+        "teachers": [
+          "Tania Gameleira Santos"
+        ],
+        "classroom": "Sala 08",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 2º ADM (Manhã)"
+        ],
+        "time": "10:00 - 12:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Gestão de Pessoas",
+        "size": 1,
+        "teachers": [
+          "Tania Gameleira Santos"
+        ],
+        "classroom": "Sala 10",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 2º ADM (Tarde)"
+        ],
+        "time": "10:00 - 12:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Gestão de Pessoas",
+        "size": 1,
+        "teachers": [
+          "Tania Gameleira Santos"
+        ],
+        "classroom": "Sala 08",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 2º ADM (Manhã)"
+        ],
+        "time": "07:30 - 09:30",
+        "color": ""
+      },
+      {
+        "subject": "Gestão Administrativa em Eventos",
+        "size": 1,
+        "teachers": [
+          "Tania Gameleira Santos"
+        ],
+        "classroom": "Sala 07",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 2º EVENTOS (Manhã)"
+        ],
+        "time": "10:00 - 12:00",
+        "color": ""
+      },
+      {
+        "subject": "Gestão de Pessoas",
+        "size": 1,
+        "teachers": [
+          "Tania Gameleira Santos"
+        ],
+        "classroom": "Sala 10",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 2º ADM (Tarde)"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Tania Gameleira Santos
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

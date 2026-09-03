@@ -1,0 +1,145 @@
+---
+slug: /professor/marco_antonio_conceicao
+description: Marco Antonio Conceição
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Marco Antonio Conceição",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Filosofia",
+        "size": 1,
+        "teachers": [
+          "Marco Antonio Conceição"
+        ],
+        "classroom": "Sala 07",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 2º EVENTOS (Manhã)"
+        ],
+        "time": "07:30 - 08:30",
+        "color": ""
+      },
+      {
+        "subject": "Filosofia",
+        "size": 1,
+        "teachers": [
+          "Marco Antonio Conceição"
+        ],
+        "classroom": "Sala 18",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 3º EVENTOS (Tarde)"
+        ],
+        "time": "10:00 - 12:00",
+        "color": ""
+      },
+      {
+        "subject": "Filosofia",
+        "size": 1,
+        "teachers": [
+          "Marco Antonio Conceição"
+        ],
+        "classroom": "Sala 14",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 1º INFO (Manhã)"
+        ],
+        "time": "13:30 - 14:30",
+        "color": ""
+      },
+      {
+        "subject": "Filosofia",
+        "size": 1,
+        "teachers": [
+          "Marco Antonio Conceição"
+        ],
+        "classroom": "Sala 01",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 1º EVENTOS (Manhã)"
+        ],
+        "time": "14:30 - 15:30",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Ética, Cidadania e Responsabilida de Social",
+        "size": 1,
+        "teachers": [
+          "Marco Antonio Conceição"
+        ],
+        "classroom": "Sala 07",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 2º EVENTOS (Manhã)"
+        ],
+        "time": "07:30 - 09:30",
+        "color": ""
+      },
+      {
+        "subject": "Filosofia",
+        "size": 1,
+        "teachers": [
+          "Marco Antonio Conceição"
+        ],
+        "classroom": "Sala 13",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 1º ADM (Manhã)"
+        ],
+        "time": "13:30 - 14:30",
+        "color": ""
+      },
+      {
+        "subject": "Filosofia",
+        "size": 1,
+        "teachers": [
+          "Marco Antonio Conceição"
+        ],
+        "classroom": "Sala 15",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 1º EVENTOS (Tarde)"
+        ],
+        "time": "14:30 - 15:30",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Marco Antonio Conceição
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

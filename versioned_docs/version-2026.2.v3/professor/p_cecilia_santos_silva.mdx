@@ -1,0 +1,145 @@
+---
+slug: /professor/cecilia_santos_silva
+description: Cecilia Santos Silva
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Cecilia Santos Silva",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Química",
+        "size": 1,
+        "teachers": [
+          "Cecilia Santos Silva"
+        ],
+        "classroom": "Sala 13",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 1º ADM (Manhã)"
+        ],
+        "time": "07:30 - 09:30",
+        "color": ""
+      },
+      {
+        "subject": "Química",
+        "size": 1,
+        "teachers": [
+          "Cecilia Santos Silva"
+        ],
+        "classroom": "Sala 08",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 2º ADM (Manhã)"
+        ],
+        "time": "13:30 - 15:30",
+        "color": ""
+      },
+      {
+        "subject": "Química",
+        "size": 1,
+        "teachers": [
+          "Cecilia Santos Silva"
+        ],
+        "classroom": "Sala 14",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 1º INFO (Manhã)"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Química",
+        "size": 1,
+        "teachers": [
+          "Cecilia Santos Silva"
+        ],
+        "classroom": "Sala 10",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 2º ADM (Tarde)"
+        ],
+        "time": "07:30 - 09:30",
+        "color": ""
+      },
+      {
+        "subject": "Química",
+        "size": 1,
+        "teachers": [
+          "Cecilia Santos Silva"
+        ],
+        "classroom": "Sala 01",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 1º EVENTOS (Manhã)"
+        ],
+        "time": "10:00 - 12:00",
+        "color": ""
+      },
+      {
+        "subject": "Química",
+        "size": 1,
+        "teachers": [
+          "Cecilia Santos Silva"
+        ],
+        "classroom": "Sala 15",
+        "students": [
+          "Técnico Integrado em Eventos (Integrado) - 1º EVENTOS (Tarde)"
+        ],
+        "time": "13:30 - 15:30",
+        "color": ""
+      },
+      {
+        "subject": "Química",
+        "size": 1,
+        "teachers": [
+          "Cecilia Santos Silva"
+        ],
+        "classroom": "Sala 16",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 2º INFO (Tarde)"
+        ],
+        "time": "16:00 - 18:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Cecilia Santos Silva
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

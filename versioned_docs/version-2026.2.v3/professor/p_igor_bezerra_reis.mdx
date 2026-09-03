@@ -1,0 +1,147 @@
+---
+slug: /professor/igor_bezerra_reis
+description: Igor Bezerra Reis
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Igor Bezerra Reis",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": [
+      {
+        "subject": "Tópicos Especiais em Desenvolvimento",
+        "size": 1,
+        "teachers": [
+          "Igor Bezerra Reis"
+        ],
+        "classroom": "Laboratório de Informática 2",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 3º INFO (Manhã)"
+        ],
+        "time": "10:00 - 12:00",
+        "color": ""
+      },
+      {
+        "subject": "Desenvolvimento Front-End II",
+        "size": 1,
+        "teachers": [
+          "Igor Bezerra Reis"
+        ],
+        "classroom": "Laboratório de Informática 1",
+        "students": [
+          "Sistemas para Internet - 2º Período (Noite)"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": [
+      {
+        "subject": "Tópicos Especiais em Desenvolvimento",
+        "size": 1,
+        "teachers": [
+          "Igor Bezerra Reis"
+        ],
+        "classroom": "Laboratório de Informática 2",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 3º INFO (Manhã)"
+        ],
+        "time": "07:30 - 09:30",
+        "color": ""
+      },
+      {
+        "subject": "Desenvolvimento Front-End II",
+        "size": 1,
+        "teachers": [
+          "Igor Bezerra Reis"
+        ],
+        "classroom": "Laboratório de Informática 1",
+        "students": [
+          "Sistemas para Internet - 2º Período (Noite)"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Tópicos Especiais em Desenvolvimento",
+        "size": 1,
+        "teachers": [
+          "Igor Bezerra Reis"
+        ],
+        "classroom": "Laboratório de Informática 2",
+        "students": [
+          "Técnico Integrado em Informática (Integrado) - 3º INFO (Manhã)"
+        ],
+        "time": "10:00 - 12:00",
+        "color": ""
+      },
+      {
+        "subject": "Redes de Computadores II",
+        "size": 1,
+        "teachers": [
+          "Igor Bezerra Reis"
+        ],
+        "classroom": "Laboratório de Informática 2",
+        "students": [
+          "Sistemas para Internet - 4º Período (Noite)"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Redes de Computadores II",
+        "size": 1,
+        "teachers": [
+          "Igor Bezerra Reis"
+        ],
+        "classroom": "Laboratório de Informática 2",
+        "students": [
+          "Sistemas para Internet - 4º Período (Noite)"
+        ],
+        "time": "18:00 - 19:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Igor Bezerra Reis
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

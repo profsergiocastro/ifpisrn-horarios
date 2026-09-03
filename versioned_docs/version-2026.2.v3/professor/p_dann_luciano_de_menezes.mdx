@@ -1,0 +1,120 @@
+---
+slug: /professor/dann_luciano_de_menezes
+description: Dann Luciano de Menezes
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Dann Luciano de Menezes",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Estrutura de Dados",
+        "size": 1,
+        "teachers": [
+          "Dann Luciano de Menezes"
+        ],
+        "classroom": "Laboratório de Informática 1",
+        "students": [
+          "Sistemas para Internet - 2º Período (Noite)"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Arquitetura de Software e Entrega Contínua",
+        "size": 1,
+        "teachers": [
+          "Dann Luciano de Menezes"
+        ],
+        "classroom": "Laboratório de Informática 2",
+        "students": [
+          "Sistemas para Internet - 4º Período (Noite)"
+        ],
+        "time": "19:00 - 20:00",
+        "color": ""
+      },
+      {
+        "subject": "Estrutura de Dados",
+        "size": 1,
+        "teachers": [
+          "Dann Luciano de Menezes"
+        ],
+        "classroom": "Laboratório de Informática 1",
+        "students": [
+          "Sistemas para Internet - 2º Período (Noite)"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Práticas de Extensão III",
+        "size": 1,
+        "teachers": [
+          "Dann Luciano de Menezes"
+        ],
+        "classroom": "Sala 10",
+        "students": [
+          "Sistemas para Internet - 4º Período (Noite)"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      },
+      {
+        "subject": "Arquitetura de Software e Entrega Contínua",
+        "size": 1,
+        "teachers": [
+          "Dann Luciano de Menezes"
+        ],
+        "classroom": "Laboratório de Informática 2",
+        "students": [
+          "Sistemas para Internet - 4º Período (Noite)"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Dann Luciano de Menezes
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>

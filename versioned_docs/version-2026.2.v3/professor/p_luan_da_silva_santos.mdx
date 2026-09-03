@@ -1,0 +1,161 @@
+---
+slug: /professor/luan_da_silva_santos
+description: Luan da Silva Santos
+---
+import { Grid } from "@site/src/components/Grid";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+export const data = {
+  title: "Luan da Silva Santos",
+  base: "",
+  weekClasses: [
+  {
+    "dayName": "Segunda-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Terça-Feira",
+    "dayClasses": [
+      {
+        "subject": "Matemática",
+        "size": 1,
+        "teachers": [
+          "Luan da Silva Santos"
+        ],
+        "classroom": "Sala 17",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 3º ADM (Manhã)"
+        ],
+        "time": "07:30 - 08:30",
+        "color": ""
+      },
+      {
+        "subject": "Trabalho de Conclusão de Curso I",
+        "size": 1,
+        "teachers": [
+          "Luan da Silva Santos"
+        ],
+        "classroom": "Sala 18",
+        "students": [
+          "Licenciatura em Matemática - 6º Período (Noite - PPC 2023)"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quarta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Cálculo III",
+        "size": 1,
+        "teachers": [
+          "Luan da Silva Santos"
+        ],
+        "classroom": "Sala 18",
+        "students": [
+          "Licenciatura em Matemática - 6º Período (Noite - PPC 2023)"
+        ],
+        "time": "18:00 - 20:00",
+        "color": ""
+      },
+      {
+        "subject": "Probabilidade e Estatística",
+        "size": 1,
+        "teachers": [
+          "Luan da Silva Santos"
+        ],
+        "classroom": "Indefinido",
+        "students": [
+          "Licenciatura em Matemática - 6º Período (Noite - PPC 2023)",
+          "Licenciatura em Matemática - PPC 2016 (A)"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Quinta-Feira",
+    "dayClasses": [
+      {
+        "subject": "Matemática",
+        "size": 1,
+        "teachers": [
+          "Luan da Silva Santos"
+        ],
+        "classroom": "Sala 17",
+        "students": [
+          "Técnico Integrado em Administração (Integrado) - 3º ADM (Manhã)"
+        ],
+        "time": "10:00 - 12:00",
+        "color": ""
+      },
+      {
+        "subject": "Probabilidade e Estatística",
+        "size": 1,
+        "teachers": [
+          "Luan da Silva Santos"
+        ],
+        "classroom": "Indefinido",
+        "students": [
+          "Licenciatura em Matemática - 6º Período (Noite - PPC 2023)",
+          "Licenciatura em Matemática - PPC 2016 (A)"
+        ],
+        "time": "18:00 - 19:00",
+        "color": ""
+      },
+      {
+        "subject": "Cálculo III",
+        "size": 1,
+        "teachers": [
+          "Luan da Silva Santos"
+        ],
+        "classroom": "Sala 18",
+        "students": [
+          "Licenciatura em Matemática - 6º Período (Noite - PPC 2023)"
+        ],
+        "time": "19:00 - 20:00",
+        "color": ""
+      },
+      {
+        "subject": "Matemática",
+        "size": 1,
+        "teachers": [
+          "Luan da Silva Santos"
+        ],
+        "classroom": "Sala 08",
+        "students": [
+          "Técnico em Gastronomia (PROEJA) - 6º Período (Noite)"
+        ],
+        "time": "20:00 - 22:00",
+        "color": ""
+      }
+    ]
+  },
+  {
+    "dayName": "Sexta-Feira",
+    "dayClasses": []
+  },
+  {
+    "dayName": "Sábado",
+    "dayClasses": []
+  }
+],
+  alert: ""
+}
+
+# Luan da Silva Santos
+
+<div>
+  {
+    <BrowserOnly>
+      {() => (
+        <Grid
+          title={data.title}
+          weekClasses={data.weekClasses}
+        />
+      )}
+    </BrowserOnly>
+  }
+</div>
