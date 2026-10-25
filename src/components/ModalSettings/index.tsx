@@ -109,8 +109,10 @@ export function ModalSettings({ downloadScreenshot }: ModalSettingsProps) {
       }
     } catch (error) {
       console.error('Falha ao gerar imagem do horário:', error)
+      const detail =
+        error instanceof Error ? error.message.slice(0, 160) : 'Erro desconhecido'
       setScreenshotMessage(
-        'Não foi possível gerar a imagem. Tente novamente ou escolha uma visualização mais condensada.',
+        `Não foi possível gerar a imagem. Tente uma visualização mais condensada. Detalhe: ${detail}`,
       )
     } finally {
       setIsGeneratingScreenshot(false)

@@ -38,18 +38,23 @@ export function Sidebar() {
     return canvasToBlob(canvas)
   }
 
-  function takeScreenShot(canva: HTMLElement): Promise<HTMLCanvasElement> {
+  async function takeScreenShot(canva: HTMLElement): Promise<HTMLCanvasElement> {
+    if (!canva) {
+      throw new Error('A grade de horários não foi encontrada para captura.')
+    }
+
     const ios = isIOSDevice()
     const width = Math.max(canva.scrollWidth, canva.offsetWidth, 1)
     const height = Math.max(canva.scrollHeight, canva.offsetHeight, 1)
 
-    // iPhones/iPads have tighter canvas memory limits. Keep the exported
-    // image within a conservative pixel budget instead of always using 4x.
-    const requestedScale = ios ? 1.5 : 4
-    const maxPixels = ios ? 12_000_000 : 32_000_000
-    const maxDimension = ios ? 8192 : 16384
+    // Older iOS devices can fail silently when a canvas is larger than
+    // roughly 4096px on one side. Use a lower pixel budget on iOS and retry
+    // at progressively smaller scales if the first render fails.
+    const requestedScale = ios ? 1.25 : 4
+    const maxPixels = ios ? 8_000_000 : 32_000_000
+    const maxDimension = ios ? 4096 : 16384
     const safeScale = Math.max(
-      0.5,
+      0.25,
       Math.min(
         requestedScale,
         Math.sqrt(maxPixels / (width * height)),
@@ -57,27 +62,104 @@ export function Sidebar() {
         maxDimension / height,
       ),
     )
+    const scales = ios
+      ? [...new Set([
+          safeScale,
+          Math.min(safeScale, 0.85),
+          Math.min(safeScale, 0.6),
+          Math.min(safeScale, 0.4),
+        ])]
+      : [safeScale]
 
-    return html2canvas(canva, {
-      useCORS: true,
-      allowTaint: false,
-      scale: safeScale,
-      backgroundColor: null,
-    })
+    let lastError: unknown
+
+    for (const scale of scales) {
+      try {
+        const canvas = await html2canvas(canva, {
+          useCORS: true,
+          allowTaint: false,
+          scale,
+          // The original grid and empty timetable cells are partly
+          // transparent. An opaque white base prevents transparent slots
+          // from appearing black in image viewers.
+          backgroundColor: '#ffffff',
+          logging: false,
+          imageTimeout: 15000,
+          windowWidth: Math.max(document.documentElement.clientWidth, width),
+          windowHeight: Math.max(document.documentElement.clientHeight, height),
+        })
+
+        if (
+          canvas.width > 0 &&
+          canvas.height > 0 &&
+          canvas.width <= maxDimension &&
+          canvas.height <= maxDimension
+        ) {
+          return canvas
+        }
+
+        lastError = new Error(
+          `A captura retornou dimensões inválidas: ${canvas.width} × ${canvas.height}.`,
+        )
+      } catch (error) {
+        lastError = error
+      }
+    }
+
+    const reason =
+      lastError instanceof Error ? ` Detalhe: ${lastError.message}` : ''
+    throw new Error(
+      `O navegador não conseguiu renderizar a grade mesmo reduzindo a resolução.${reason}`,
+    )
   }
 
   function canvasToBlob(canvas: HTMLCanvasElement): Promise<Blob> {
     return new Promise((resolve, reject) => {
-      canvas.toBlob(
-        (blob) => {
-          if (blob) {
-            resolve(blob)
-          } else {
-            reject(new Error('O navegador não conseguiu gerar o arquivo PNG.'))
+      const fallbackToDataUrl = () => {
+        try {
+          const dataUrl = canvas.toDataURL('image/png')
+          const base64 = dataUrl.split(',')[1]
+          if (!base64) {
+            reject(new Error('A captura não produziu dados de imagem.'))
+            return
           }
-        },
-        'image/png',
-      )
+
+          const binary = window.atob(base64)
+          const bytes = new Uint8Array(binary.length)
+          for (let index = 0; index < binary.length; index++) {
+            bytes[index] = binary.charCodeAt(index)
+          }
+          resolve(new Blob([bytes], { type: 'image/png' }))
+        } catch (error) {
+          reject(
+            error instanceof Error
+              ? error
+              : new Error('Não foi possível converter a captura em PNG.'),
+          )
+        }
+      }
+
+      if (typeof canvas.toBlob !== 'function') {
+        fallbackToDataUrl()
+        return
+      }
+
+      try {
+        canvas.toBlob(
+          (blob) => {
+            if (blob && blob.size > 0) {
+              resolve(blob)
+            } else {
+              // Some browser versions return a null/empty blob instead of
+              // throwing. Try the compatibility path before reporting error.
+              fallbackToDataUrl()
+            }
+          },
+          'image/png',
+        )
+      } catch {
+        fallbackToDataUrl()
+      }
     })
   }
 
