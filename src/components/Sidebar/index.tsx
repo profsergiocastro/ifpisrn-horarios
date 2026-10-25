@@ -50,16 +50,24 @@ export function Sidebar() {
     // Mobile Safari must keep the canvas below both its per-side and total
     // pixel limits. For iOS we export one column per weekday, rather than the
     // clipped carousel viewport currently visible on a phone.
-    const slider = canva.querySelector<HTMLElement>('.keen-slider')
-    const slideCount = slider
-      ? slider.querySelectorAll<HTMLElement>('.keen-slider__slide').length
-      : 0
+    const slider = canva.querySelector<HTMLElement>(
+      '[data-timetable-slider-root]',
+    )
+    const slides = slider
+      ? Array.from(
+          slider.querySelectorAll<HTMLElement>('.keen-slider__slide'),
+        )
+      : []
+    const slideCount = slides.length
     const sidebarWidth =
       canva.querySelector<HTMLElement>('.sidebar')?.getBoundingClientRect().width ??
       Math.max(1, width * 0.1)
-    const dayWidth = slider
-      ? Math.max(1, slider.getBoundingClientRect().width)
-      : Math.max(1, width - sidebarWidth)
+    // Measure a single day column, not the whole carousel viewport. Using
+    // the viewport width here multiplied every day by the phone's screen
+    // width and caused an oversized, cropped export.
+    const dayWidth = slides[0]
+      ? Math.max(1, slides[0].getBoundingClientRect().width)
+      : Math.max(1, (width - sidebarWidth) / Math.max(1, slideCount))
     const captureWidth =
       ios && slideCount > 1
         ? Math.ceil(sidebarWidth + dayWidth * slideCount)
@@ -109,7 +117,7 @@ export function Sidebar() {
             if (!cloneRoot) return
 
             const cloneSlider = cloneRoot.querySelector<HTMLElement>(
-              '.keen-slider',
+              '[data-timetable-slider-root]',
             )
             const cloneSlides = cloneSlider
               ? Array.from(

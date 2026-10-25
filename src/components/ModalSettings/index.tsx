@@ -98,11 +98,34 @@ export function ModalSettings({ downloadScreenshot }: ModalSettingsProps) {
         setScreenshotUrl(previewUrl)
         setScreenshotFile(file)
         setCanShareScreenshot(canShare)
-        setScreenshotMessage(
-          canShare
-            ? 'Imagem pronta. Toque em compartilhar ou abra a imagem para salvá-la.'
-            : 'Imagem pronta. Abra a imagem e mantenha-a pressionada para salvar.',
-        )
+
+        if (canShare && typeof navigator.share === 'function') {
+          try {
+            // Try to open the native iOS share sheet as part of the original
+            // camera action, so the user can choose “Save to Files” directly.
+            // If capture took too long and Safari expired user activation,
+            // retain the generated file and show the manual share button.
+            const shareResult = navigator.share({ files: [file] })
+            if (shareResult && typeof shareResult.then === 'function') {
+              await shareResult
+            }
+            setScreenshotMessage(
+              'Imagem gerada. No menu que abriu, escolha “Salvar em Arquivos” para selecionar onde guardar.',
+            )
+          } catch (shareError) {
+            const canceled =
+              shareError instanceof DOMException && shareError.name === 'AbortError'
+            setScreenshotMessage(
+              canceled
+                ? 'Imagem pronta. O compartilhamento foi cancelado; toque no botão de compartilhar para escolher onde salvar.'
+                : 'Imagem pronta. Toque no botão de compartilhar para escolher onde salvar, ou abra a imagem abaixo.',
+            )
+          }
+        } else {
+          setScreenshotMessage(
+            'Imagem pronta. Abra a imagem e mantenha-a pressionada para salvar.',
+          )
+        }
       } else {
         downloadBlob(blob, fileName)
         setScreenshotMessage('Imagem gerada; o download foi iniciado.')

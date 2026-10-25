@@ -74,7 +74,7 @@ export function Timetable() {
   const { rowsSize } = useContext(GridContext)
 
   return (
-    <Container ref={sliderRef} $isMenuFixed={isMenuFixed}>
+    <Container ref={sliderRef} $isMenuFixed={isMenuFixed} data-timetable-slider-root="true">
       {weekClassesChanged.map((week) => {
         const groupTimetable = createGroupItems(week.dayClasses)
         const index = weekClassesChanged.findIndex(
