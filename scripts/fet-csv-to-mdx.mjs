@@ -1,4 +1,4 @@
-import { readFile, rm, mkdir, writeFile } from 'node:fs/promises'
+import { readFile, rm, mkdir, writeFile, mkdtemp, rename, stat } from 'node:fs/promises'
 import path from 'node:path'
 import crypto from 'node:crypto'
 
@@ -186,37 +186,96 @@ function getCoursePosition(courseName) {
 }
 
 async function main() {
-  const csvPath = process.argv[2]
+  const args = process.argv.slice(2)
+  const force = args.includes('--force')
+  const csvPath = args.find((arg) => arg !== '--force')
   if (!csvPath) {
-    console.error('Usage: node scripts/fet-csv-to-mdx.mjs <path-to-timetable.csv>')
-    process.exit(1)
+    throw new Error(
+      'Usage: node scripts/fet-csv-to-mdx.mjs <path-to-timetable.csv> [--force]',
+    )
+  }
+
+  // Read and validate the entire input before creating or replacing any
+  // published timetable directories.
+  const csvContent = await readFile(csvPath, 'utf8')
+  const lines = csvContent.split(/\r?\n/).filter((line) => line.trim().length > 0)
+  if (lines.length < 2) {
+    throw new Error('The timetable CSV is empty or has no data rows.')
+  }
+
+  const header = parseCsvLine(lines[0]).map((value) => value.trim())
+  const idx = Object.fromEntries(header.map((value, index) => [value, index]))
+  const required = ['Day', 'Hour', 'Students Sets', 'Subject', 'Teachers', 'Room']
+  const missingColumns = required.filter((key) => !(key in idx))
+  if (missingColumns.length > 0) {
+    throw new Error(
+      'Missing required CSV column(s): ' + missingColumns.join(', ') +
+      '. No timetable files were changed.',
+    )
+  }
+
+  const rows = []
+  const malformedRows = []
+  for (let lineIndex = 1; lineIndex < lines.length; lineIndex++) {
+    const cols = parseCsvLine(lines[lineIndex])
+    if (cols.length !== header.length) {
+      malformedRows.push(lineIndex + 1)
+      continue
+    }
+
+    rows.push({
+      lineNumber: lineIndex + 1,
+      dayRaw: cols[idx['Day']],
+      hourRaw: cols[idx['Hour']],
+      studentsRaw: cols[idx['Students Sets']],
+      subject: (cols[idx['Subject']] ?? '').trim(),
+      teachersRaw: cols[idx['Teachers']],
+      roomRaw: (cols[idx['Room']] ?? '').trim(),
+    })
+  }
+
+  if (malformedRows.length > 0) {
+    const examples = malformedRows.slice(0, 10).join(', ')
+    const suffix = malformedRows.length > 10 ? ', ...' : ''
+    throw new Error(
+      'Malformed CSV row(s): ' + examples + suffix +
+      '. No timetable files were changed.',
+    )
+  }
+
+  const usableRows = rows.filter((row) => {
+    const dayName = DAY_MAP.get(row.dayRaw?.trim()) ?? row.dayRaw?.trim()
+    return Boolean(dayName && parseHourRange(row.hourRaw?.trim()) && row.subject)
+  })
+
+  // For this campus timetable a very small input is usually a wrong file or
+  // an incomplete export. --force is available for intentionally small data.
+  const minimumRows = 20
+  if (usableRows.length === 0) {
+    throw new Error('No valid timetable entries were found. No timetable files were changed.')
+  }
+  if (usableRows.length < minimumRows && !force) {
+    throw new Error(
+      'Only ' + usableRows.length + ' valid timetable entries were found; at least ' +
+      minimumRows + ' are required for safety. If this small timetable is intentional, ' +
+      'rerun with --force. No timetable files were changed.',
+    )
   }
 
   const repoRoot = process.cwd()
   const docsRoot = path.join(repoRoot, 'docs')
-  const professorDir = path.join(docsRoot, 'professor')
-  const turmaDir = path.join(docsRoot, 'turma')
-  const salaDir = path.join(docsRoot, 'sala')
+  const stageRoot = await mkdtemp(path.join(repoRoot, '.fet-csv-to-mdx-'))
+  const generatedRoot = path.join(stageRoot, 'new')
+  const backupRoot = path.join(stageRoot, 'backup')
+  await mkdir(generatedRoot, { recursive: true })
+  await mkdir(backupRoot, { recursive: true })
 
-  await rm(professorDir, { recursive: true, force: true })
-  await rm(turmaDir, { recursive: true, force: true })
-  await rm(salaDir, { recursive: true, force: true })
+  const professorDir = path.join(generatedRoot, 'professor')
+  const turmaDir = path.join(generatedRoot, 'turma')
+  const salaDir = path.join(generatedRoot, 'sala')
   await mkdir(professorDir, { recursive: true })
   await mkdir(turmaDir, { recursive: true })
   await mkdir(salaDir, { recursive: true })
-
-  const csvContent = await readFile(csvPath, 'utf8')
-  const lines = csvContent.split(/\r?\n/).filter((l) => l.trim().length > 0)
-  const header = parseCsvLine(lines[0]).map((h) => h.trim())
-  const idx = Object.fromEntries(header.map((h, i) => [h, i]))
-
-  const required = ['Day', 'Hour', 'Students Sets', 'Subject', 'Teachers', 'Room']
-  for (const key of required) {
-    if (!(key in idx)) {
-      console.error(`Missing required column "${key}" in CSV header.`)
-      process.exit(1)
-    }
-  }
 
   const teachersMap = new Map()
   const studentsMap = new Map()
@@ -227,18 +286,10 @@ async function main() {
     return map.get(name)
   }
 
-  for (let i = 1; i < lines.length; i++) {
-    const cols = parseCsvLine(lines[i])
-    const dayRaw = cols[idx['Day']]
-    const hourRaw = cols[idx['Hour']]
-    const studentsRaw = cols[idx['Students Sets']]
-    const subject = (cols[idx['Subject']] ?? '').trim()
-    const teachersRaw = cols[idx['Teachers']]
-    const roomRaw = (cols[idx['Room']] ?? '').trim()
-
+  for (const row of usableRows) {
+    const { dayRaw, hourRaw, studentsRaw, subject, teachersRaw, roomRaw } = row
     const dayName = DAY_MAP.get(dayRaw?.trim()) ?? dayRaw?.trim()
     const hour = parseHourRange(hourRaw?.trim())
-    if (!dayName || !hour || !subject) continue
 
     const teachers = splitPlus(teachersRaw)
     const students = splitPlus(studentsRaw)
@@ -330,12 +381,105 @@ async function main() {
   await writeTurmaDocs(studentsMap)
   await writeEntityDocs(roomsMap, salaDir, '/sala', 's_')
 
+  const counts = {
+    professors: teachersMap.size,
+    turmas: studentsMap.size,
+    salas: roomsMap.size,
+  }
+  if (counts.professors === 0 || counts.turmas === 0 || counts.salas === 0) {
+    throw new Error(
+      'Generated timetable data is incomplete (at least one entity type is empty). ' +
+      'The current published directories were not changed.',
+    )
+  }
+
+  // Build everything in a temporary directory first. Only after generation
+  // succeeds do we swap the three generated folders into docs/.
+  const outputs = [
+    {
+      name: 'professor',
+      target: path.join(docsRoot, 'professor'),
+      staged: professorDir,
+      backup: path.join(backupRoot, 'professor'),
+    },
+    {
+      name: 'turma',
+      target: path.join(docsRoot, 'turma'),
+      staged: turmaDir,
+      backup: path.join(backupRoot, 'turma'),
+    },
+    {
+      name: 'sala',
+      target: path.join(docsRoot, 'sala'),
+      staged: salaDir,
+      backup: path.join(backupRoot, 'sala'),
+    },
+  ]
+  const backedUp = new Set()
+  const installed = new Set()
+
+  try {
+    for (const output of outputs) {
+      let targetExists = true
+      try {
+        await stat(output.target)
+      } catch (error) {
+        if (error?.code === 'ENOENT') {
+          targetExists = false
+        } else {
+          throw error
+        }
+      }
+
+      if (targetExists) {
+        await rename(output.target, output.backup)
+        backedUp.add(output.name)
+      }
+
+      await rename(output.staged, output.target)
+      installed.add(output.name)
+    }
+  } catch (commitError) {
+    const rollbackErrors = []
+    for (const output of [...outputs].reverse()) {
+      if (installed.has(output.name)) {
+        try {
+          await rm(output.target, { recursive: true, force: true })
+        } catch (error) {
+          rollbackErrors.push(output.name + ' (remove new files): ' + String(error))
+        }
+      }
+      if (backedUp.has(output.name)) {
+        try {
+          await rename(output.backup, output.target)
+        } catch (error) {
+          rollbackErrors.push(output.name + ' (restore previous files): ' + String(error))
+        }
+      }
+    }
+
+    if (rollbackErrors.length > 0) {
+      throw new Error(
+        'Publishing the generated files failed and rollback was incomplete. ' +
+        'Do not delete the temporary recovery directory: ' + stageRoot +
+        '. Recovery details: ' + rollbackErrors.join('; '),
+      )
+    }
+
+    await rm(stageRoot, { recursive: true, force: true })
+    throw commitError
+  }
+
+  await rm(stageRoot, { recursive: true, force: true })
+
   console.log(
     JSON.stringify(
       {
-        professors: teachersMap.size,
-        turmas: studentsMap.size,
-        salas: roomsMap.size,
+        ...counts,
+        validRows: usableRows.length,
+        skippedRows: rows.length - usableRows.length,
+        forcedSmallInput: force && usableRows.length < minimumRows,
+        publishedDirectories: ['professor', 'turma', 'sala'],
       },
       null,
       2,

@@ -58,10 +58,11 @@ const config: Config = {
   projectName: 'ifpisrn-horarios',
   trailingSlash: false,
 
-  onBrokenLinks: 'warn',
+  // Fail the production build when a site route or Markdown link is broken.
+  onBrokenLinks: 'throw',
   markdown: {
     hooks: {
-      onBrokenMarkdownLinks: 'warn',
+      onBrokenMarkdownLinks: 'throw',
     },
   },
 

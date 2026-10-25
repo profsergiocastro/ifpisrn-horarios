@@ -50,7 +50,7 @@ function CourseSection() {
     <div className={clsx(styles.section, styles.sectionAlt)}>
       <div className="container">
         <Heading as="h2" className={clsx('margin-bottom--lg', 'text--center')}>
-          <h2>Acesso rápido aos iniciantes</h2>
+          Acesso rápido aos cursos
         </Heading>
         <div className={clsx('row', styles.coursesSection)}>
           {courseColumns.map((courseItems, i) => (
