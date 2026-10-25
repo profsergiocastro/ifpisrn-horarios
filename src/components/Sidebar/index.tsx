@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas'
 import { GridContext } from '../Grid'
 import { ModalSettings, ModalSettingsProps } from '../ModalSettings'
 
@@ -18,34 +18,67 @@ export interface SidebarProps {
   modal: ModalSettingsProps
 }
 
+function isIOSDevice(): boolean {
+  if (typeof navigator === 'undefined') return false
+
+  return (
+    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+  )
+}
+
 export function Sidebar() {
   const { timeChanged } = useContext(GridContext)
-
   let timeOffSet = 2
 
-  const { rowsSize, title, gridRef } = useContext(GridContext)
+  const { rowsSize, gridRef } = useContext(GridContext)
 
-  function createFileName(extension: string, name: string) {
-    const date = new Date()
-    const formattedDate = date.toISOString().replace(/[:.]/g, '-')
-    return `${name}-${formattedDate}.${extension}`
+  const downloadScreenshot = async (): Promise<Blob> => {
+    const canvas = await takeScreenShot(gridRef.current)
+    return canvasToBlob(canvas)
   }
 
-  const downloadScreenshot = () => takeScreenShot(gridRef.current).then(download)
-
   function takeScreenShot(canva: HTMLElement): Promise<HTMLCanvasElement> {
+    const ios = isIOSDevice()
+    const width = Math.max(canva.scrollWidth, canva.offsetWidth, 1)
+    const height = Math.max(canva.scrollHeight, canva.offsetHeight, 1)
+
+    // iPhones/iPads have tighter canvas memory limits. Keep the exported
+    // image within a conservative pixel budget instead of always using 4x.
+    const requestedScale = ios ? 1.5 : 4
+    const maxPixels = ios ? 12_000_000 : 32_000_000
+    const maxDimension = ios ? 8192 : 16384
+    const safeScale = Math.max(
+      0.5,
+      Math.min(
+        requestedScale,
+        Math.sqrt(maxPixels / (width * height)),
+        maxDimension / width,
+        maxDimension / height,
+      ),
+    )
+
     return html2canvas(canva, {
       useCORS: true,
-      allowTaint: true,
-      scale: 4, // Increase scale for better quality
+      allowTaint: false,
+      scale: safeScale,
+      backgroundColor: null,
     })
   }
 
-  function download(image: HTMLCanvasElement) {
-    const link = document.createElement('a');
-    link.download = createFileName('png', title)
-    link.href = image.toDataURL('image/png');
-    link.click();
+  function canvasToBlob(canvas: HTMLCanvasElement): Promise<Blob> {
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(
+        (blob) => {
+          if (blob) {
+            resolve(blob)
+          } else {
+            reject(new Error('O navegador não conseguiu gerar o arquivo PNG.'))
+          }
+        },
+        'image/png',
+      )
+    })
   }
 
   return (

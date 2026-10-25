@@ -25,7 +25,10 @@ export const DialogContent = styled(Dialog.Content)`
   justify-content: space-between;
 
   width: min(30rem, 80%);
-  height: 25rem;
+  height: auto;
+  min-height: 25rem;
+  max-height: 90vh;
+  overflow-y: auto;
 
   transform: translate(-50%, -50%);
 
@@ -64,8 +67,40 @@ export const DialogContent = styled(Dialog.Content)`
   }
 
   footer {
-    height: 4rem;
+    min-height: 4rem;
+    height: auto;
+    gap: 0.75rem;
 
+    .screenshotInfo {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+      min-width: 0;
+    }
+
+    .screenshotMessage {
+      max-width: 100%;
+      font-size: 0.75rem;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    .screenshotActions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .screenshotSpinner {
+      animation: screenshotSpin 1s linear infinite;
+    }
+
+    @keyframes screenshotSpin {
+      to { transform: rotate(360deg); }
+    }
   }
 `
 export const DialogClose = styled(Dialog.Close)`
@@ -217,6 +252,20 @@ export const SettingsContainer = styled.main`
   }
 `
 
+export const ScreenshotLink = styled.a`
+  color: #fff;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  text-decoration: underline;
+  cursor: pointer;
+  touch-action: manipulation;
+
+  &:hover {
+    color: #fff;
+    filter: brightness(0.9);
+  }
+`
+
 export const ScreenshotButton = styled.button`
   display: flex;
   justify-content: center;
@@ -224,6 +273,7 @@ export const ScreenshotButton = styled.button`
 
   width: 2.5rem;
   height: 2.5rem;
+  flex-shrink: 0;
 
   border: none;
   border-radius: 100%;
@@ -240,5 +290,11 @@ export const ScreenshotButton = styled.button`
 
   &:hover {
     filter: brightness(0.9);
+  }
+
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: wait;
   }
 `

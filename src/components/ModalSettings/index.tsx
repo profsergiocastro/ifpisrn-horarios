@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import * as Checkbox from '@radix-ui/react-checkbox'
 import * as RadioGroup from '@radix-ui/react-radio-group'
@@ -8,21 +8,138 @@ import {
   DialogContent,
   DialogTrigger,
   ScreenshotButton,
+  ScreenshotLink,
   SettingsContainer,
 } from './styles'
-import { Gear, X, Check, Camera } from 'phosphor-react'
+import { Gear, X, Check, Camera, ShareNetwork, SpinnerGap } from 'phosphor-react'
 import { RadioItem } from '../RadioItem'
 import { GridContext } from '../Grid'
 import { TimetableViewType, TimetableColorType} from '@site/src/reducers/settings/reducer'
 import { trackEvent } from '@site/src/utils/analytics'
 
 export interface ModalSettingsProps {
-  downloadScreenshot: () => any
+  downloadScreenshot: () => Promise<Blob>
 }
 
 export function ModalSettings({ downloadScreenshot }: ModalSettingsProps) {
-  const { isMenuFixed, modifyMenu, timetableView, reduceGrid, timetableColor, colorizeGrid } =
-    useContext(GridContext)
+  const {
+    isMenuFixed,
+    modifyMenu,
+    timetableView,
+    reduceGrid,
+    timetableColor,
+    colorizeGrid,
+    title,
+  } = useContext(GridContext)
+
+  const [isGeneratingScreenshot, setIsGeneratingScreenshot] = useState(false)
+  const [screenshotMessage, setScreenshotMessage] = useState('')
+  const [screenshotFile, setScreenshotFile] = useState<File | null>(null)
+  const [screenshotUrl, setScreenshotUrl] = useState<string | null>(null)
+  const [canShareScreenshot, setCanShareScreenshot] = useState(false)
+
+  useEffect(() => {
+    return () => {
+      if (screenshotUrl) URL.revokeObjectURL(screenshotUrl)
+    }
+  }, [screenshotUrl])
+
+  function isIOSDevice(): boolean {
+    return (
+      /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+    )
+  }
+
+  function createScreenshotFileName(): string {
+    const date = new Date()
+    const formattedDate = date.toISOString().replace(/[:.]/g, '-')
+    const safeTitle = String(title || 'horario').trim().replace(/[^a-zA-Z0-9À-ÿ ._()-]/g, '-')
+    return `${safeTitle || 'horario'}-${formattedDate}.png`
+  }
+
+  function downloadBlob(blob: Blob, fileName: string) {
+    const objectUrl = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = objectUrl
+    link.download = fileName
+    link.style.display = 'none'
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+    window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1500)
+  }
+
+  async function handleScreenshotClick() {
+    setIsGeneratingScreenshot(true)
+    setScreenshotMessage('Gerando imagem do horário…')
+    setScreenshotFile(null)
+    setScreenshotUrl(null)
+    setCanShareScreenshot(false)
+
+    try {
+      const blob = await downloadScreenshot()
+      const fileName = createScreenshotFileName()
+
+      if (isIOSDevice()) {
+        const previewUrl = URL.createObjectURL(blob)
+        const file = new File([blob], fileName, { type: 'image/png' })
+        let canShare = false
+
+        try {
+          canShare =
+            typeof navigator.share === 'function' &&
+            typeof navigator.canShare === 'function' &&
+            navigator.canShare({ files: [file] })
+        } catch {
+          canShare = false
+        }
+
+        setScreenshotUrl(previewUrl)
+        setScreenshotFile(file)
+        setCanShareScreenshot(canShare)
+        setScreenshotMessage(
+          canShare
+            ? 'Imagem pronta. Toque em compartilhar ou abra a imagem para salvá-la.'
+            : 'Imagem pronta. Abra a imagem e mantenha-a pressionada para salvar.',
+        )
+      } else {
+        downloadBlob(blob, fileName)
+        setScreenshotMessage('Imagem gerada; o download foi iniciado.')
+      }
+    } catch (error) {
+      console.error('Falha ao gerar imagem do horário:', error)
+      setScreenshotMessage(
+        'Não foi possível gerar a imagem. Tente novamente ou escolha uma visualização mais condensada.',
+      )
+    } finally {
+      setIsGeneratingScreenshot(false)
+    }
+  }
+
+  async function handleShareScreenshot() {
+    if (!screenshotFile || typeof navigator.share !== 'function') return
+
+    try {
+      // On iOS, share the file alone; adding title/text can break sharing on
+      // some Safari/iOS combinations.
+      await navigator.share({ files: [screenshotFile] })
+      setScreenshotMessage(
+        'Compartilhamento aberto. Selecione “Salvar imagem” ou outro destino disponível.',
+      )
+    } catch (error) {
+      if (error instanceof DOMException && error.name === 'AbortError') {
+        setScreenshotMessage(
+          'Compartilhamento cancelado. A imagem continua disponível no link abaixo.',
+        )
+      } else {
+        console.error('Falha ao compartilhar imagem do horário:', error)
+        setScreenshotMessage(
+          'Não foi possível compartilhar. Abra a imagem abaixo e mantenha-a pressionada para salvar.',
+        )
+      }
+    }
+  }
 
   function handleChangeMenu() {
     modifyMenu(!isMenuFixed)
@@ -128,20 +245,55 @@ export function ModalSettings({ downloadScreenshot }: ModalSettingsProps) {
 
           <hr />
           <footer>
-            <Dialog.Description>
-              Caso queira ter o horário como uma imagem
-            </Dialog.Description>
-            <ScreenshotButton
-              onClick={() => {
-                trackEvent('timetable_screenshot_download', {
-                  source: 'settings_modal',
-                })
-                downloadScreenshot()
-              }}
-              title="Download do horário como imagem"
-            >
-              <Camera size={25} />
-            </ScreenshotButton>
+            <div className="screenshotInfo">
+              <Dialog.Description>
+                Caso queira ter o horário como uma imagem
+              </Dialog.Description>
+              {screenshotMessage && (
+                <p className="screenshotMessage" role="status" aria-live="polite">
+                  {screenshotMessage}
+                </p>
+              )}
+              {screenshotUrl && (
+                <ScreenshotLink
+                  href={screenshotUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Abrir imagem para salvar
+                </ScreenshotLink>
+              )}
+            </div>
+            <div className="screenshotActions">
+              {screenshotFile && canShareScreenshot && (
+                <ScreenshotButton
+                  type="button"
+                  onClick={handleShareScreenshot}
+                  title="Compartilhar ou salvar imagem"
+                  aria-label="Compartilhar ou salvar imagem"
+                >
+                  <ShareNetwork size={25} />
+                </ScreenshotButton>
+              )}
+              <ScreenshotButton
+                type="button"
+                disabled={isGeneratingScreenshot}
+                onClick={() => {
+                  trackEvent('timetable_screenshot_download', {
+                    source: 'settings_modal',
+                  })
+                  void handleScreenshotClick()
+                }}
+                title="Gerar imagem do horário"
+                aria-label="Gerar imagem do horário"
+              >
+                {isGeneratingScreenshot ? (
+                  <SpinnerGap size={25} className="screenshotSpinner" />
+                ) : (
+                  <Camera size={25} />
+                )}
+              </ScreenshotButton>
+            </div>
           </footer>
         </DialogContent>
       </Dialog.Portal>
