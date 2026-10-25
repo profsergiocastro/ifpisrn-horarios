@@ -12,7 +12,7 @@ export function EmptyCell(props: { timeLength: number }) {
     <>
       {ArrayOfEmptyItems.map((el) => (
         <Container $gridArea={createGridArea({ y: el + 1, x: 1 }, 1)} key={el}>
-          <EmptyItem></EmptyItem>
+          <EmptyItem data-timetable-empty-slot="true" />
         </Container>
       ))}
     </>

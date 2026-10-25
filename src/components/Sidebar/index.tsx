@@ -51,7 +51,7 @@ export function Sidebar() {
     // roughly 4096px on one side. Use a lower pixel budget on iOS and retry
     // at progressively smaller scales if the first render fails.
     const requestedScale = ios ? 1.25 : 4
-    const maxPixels = ios ? 8_000_000 : 32_000_000
+    const maxPixels = ios ? 2_500_000 : 32_000_000
     const maxDimension = ios ? 4096 : 16384
     const safeScale = Math.max(
       0.25,
@@ -87,6 +87,41 @@ export function Sidebar() {
           imageTimeout: 15000,
           windowWidth: Math.max(document.documentElement.clientWidth, width),
           windowHeight: Math.max(document.documentElement.clientHeight, height),
+          onclone: (clonedDocument) => {
+            const cloneRoot = clonedDocument.querySelector(
+              '[data-timetable-export-root]',
+            )
+            if (!cloneRoot) return
+
+            // Replace the SVG data-URI used to hatch empty slots with a CSS
+            // gradient in the screenshot clone. Safari has stricter canvas
+            // security checks for some SVG data-image backgrounds.
+            const emptySlots = cloneRoot.querySelectorAll<HTMLElement>(
+              '[data-timetable-empty-slot]',
+            )
+            emptySlots.forEach((slot) => {
+              slot.style.backgroundColor = '#ffffff'
+              slot.style.backgroundImage =
+                'repeating-linear-gradient(135deg, transparent 0px, transparent 5px, rgba(156, 146, 172, 0.16) 5px, rgba(156, 146, 172, 0.16) 6px)'
+            })
+
+            // CSS background URLs cannot carry crossorigin metadata. Remove
+            // any remaining URL-based backgrounds from the cloned timetable
+            // so no foreign/background image can taint the exported canvas.
+            const elements = [
+              cloneRoot as HTMLElement,
+              ...Array.from(cloneRoot.querySelectorAll<HTMLElement>('*')),
+            ]
+            elements.forEach((element) => {
+              if (element.hasAttribute('data-timetable-empty-slot')) return
+              const backgroundImage =
+                clonedDocument.defaultView?.getComputedStyle(element)
+                  .backgroundImage ?? ''
+              if (backgroundImage.includes('url(')) {
+                element.style.backgroundImage = 'none'
+              }
+            })
+          },
         })
 
         if (
